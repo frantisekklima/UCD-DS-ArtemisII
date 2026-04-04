@@ -59,7 +59,7 @@ const crewData = [
     bio: 'Wiseman served as flight engineer aboard the ISS for Expedition 41 in 2014, logging 165 days in space. Before his assignment, he served as chief of the Astronaut Office. He is a designated Naval Aviator and former test pilot.',
     initials: 'RW',
     photoUrl: '/wiseman.jpg',
-    link: 'https://www.nasa.gov/astronauts/biographies/g-reid-wiseman',
+    link: 'https://www.nasa.gov/people/reid-wiseman/',
     color: 'text-blue-700 bg-blue-50 border-blue-200'
   },
   {
@@ -69,7 +69,7 @@ const crewData = [
     bio: 'Glover flew as pilot on NASA\'s SpaceX Crew-1 mission in 2020, logging 168 days in space. He participated in four spacewalks and is a former U.S. Navy test pilot with extensive combat experience.',
     initials: 'VG',
     photoUrl: '/glover.jpg',
-    link: 'https://www.nasa.gov/astronauts/biographies/victor-j-glover',
+    link: 'https://www.nasa.gov/people/victor-j-glover-jr/',
     color: 'text-red-700 bg-red-50 border-red-200'
   },
   {
@@ -79,7 +79,7 @@ const crewData = [
     bio: 'Koch holds the record for the longest single spaceflight by a woman (328 days) and participated in the first all-female spacewalk. She has served as a flight engineer on the ISS for three expeditions.',
     initials: 'CK',
     photoUrl: '/koch.jpg',
-    link: 'https://www.nasa.gov/astronauts/biographies/christina-hammock-koch',
+    link: 'https://www.nasa.gov/people/christina-koch/',
     color: 'text-emerald-700 bg-emerald-50 border-emerald-200'
   },
   {
