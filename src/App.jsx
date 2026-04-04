@@ -58,6 +58,7 @@ const crewData = [
     agency: 'NASA',
     bio: 'Wiseman served as flight engineer aboard the ISS for Expedition 41 in 2014, logging 165 days in space. Before his assignment, he served as chief of the Astronaut Office. He is a designated Naval Aviator and former test pilot.',
     initials: 'RW',
+    photoUrl: '/wiseman.jpg',
     link: 'https://www.nasa.gov/astronauts/biographies/g-reid-wiseman',
     color: 'text-blue-700 bg-blue-50 border-blue-200'
   },
@@ -67,6 +68,7 @@ const crewData = [
     agency: 'NASA',
     bio: 'Glover flew as pilot on NASA\'s SpaceX Crew-1 mission in 2020, logging 168 days in space. He participated in four spacewalks and is a former U.S. Navy test pilot with extensive combat experience.',
     initials: 'VG',
+    photoUrl: '/glover.jpg',
     link: 'https://www.nasa.gov/astronauts/biographies/victor-j-glover',
     color: 'text-red-700 bg-red-50 border-red-200'
   },
@@ -76,6 +78,7 @@ const crewData = [
     agency: 'NASA',
     bio: 'Koch holds the record for the longest single spaceflight by a woman (328 days) and participated in the first all-female spacewalk. She has served as a flight engineer on the ISS for three expeditions.',
     initials: 'CK',
+    photoUrl: '/koch.jpg',
     link: 'https://www.nasa.gov/astronauts/biographies/christina-hammock-koch',
     color: 'text-emerald-700 bg-emerald-50 border-emerald-200'
   },
@@ -85,6 +88,7 @@ const crewData = [
     agency: 'CSA',
     bio: 'Representing the Canadian Space Agency, Hansen is making his first flight to space. He is a former Royal Canadian Air Force fighter pilot and has served in numerous leadership roles within the astronaut corps.',
     initials: 'JH',
+    photoUrl: '/hansen.jpg',
     link: 'https://www.asc-csa.gc.ca/eng/astronauts/canadian/active/bio-jeremy-hansen.asp',
     color: 'text-amber-700 bg-amber-50 border-amber-200'
   }
@@ -161,6 +165,9 @@ export default function App() {
               <CrewCard key={i} member={member} />
             ))}
           </div>
+          <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
+            Data & Biographies Source: NASA / CSA
+          </div>
         </section>
 
         {/* The Hardware Section */}
@@ -231,8 +238,17 @@ function CrewCard({ member }) {
         className="w-full flex items-center justify-between p-4 hover:bg-gray-50 focus:outline-none transition-colors"
       >
         <div className="flex items-center gap-4">
-          <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-black flex items-center justify-center shrink-0 ${member.color}`}>
-             <span className="text-xl sm:text-2xl font-black font-sans tracking-widest">{member.initials}</span>
+          <div className={`relative overflow-hidden w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-black flex items-center justify-center shrink-0 ${member.color}`}>
+             {/* Initials Fallback (Now underneath the image) */}
+             <span className="text-xl sm:text-2xl font-black font-sans tracking-widest absolute inset-0 flex items-center justify-center z-0">{member.initials}</span>
+             
+             {/* Profile Picture Implementation */}
+             {/* Removed the onError hide so you can see if the browser returns a 404 broken image icon, which helps debug file path issues */}
+             <img 
+               src={member.photoUrl} 
+               alt={member.name}
+               className="absolute inset-0 w-full h-full object-cover z-10"
+             />
           </div>
           <div className="text-left">
             <div className="flex flex-wrap items-center gap-2 mb-1">
@@ -290,106 +306,111 @@ function RocketGraphic() {
   }`;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white border border-black p-4 md:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)]">
-      
-      {/* Left: Interactive Schematic SVG */}
-      <div className="flex justify-center h-[500px] md:h-[600px] bg-slate-900 rounded border border-gray-300 p-4 relative pattern-grid-lg overflow-hidden">
-        {/* Helper text overlay */}
-        <div className="absolute top-4 left-4 bg-white border border-black px-3 py-1 font-sans text-xs uppercase font-bold flex items-center gap-2 shadow-sm z-10">
-           <Info className="w-3 h-3" /> Select a component
-        </div>
-
-        <svg viewBox="0 0 400 800" className="w-full h-full drop-shadow-2xl">
-          {/* Launch Pad Base */}
-          <rect x="80" y="730" width="240" height="20" fill="#1e293b" rx="2" stroke="#0f172a" strokeWidth="2" />
-          <rect x="180" y="710" width="40" height="20" fill="#334155" stroke="#0f172a" strokeWidth="2" />
-
-          {/* RS-25 Engines */}
-          <g onClick={() => setStage('engines')} className={getStageClass('engines')}>
-            <rect x="150" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
-            <rect x="180" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
-            <rect x="210" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
-            <rect x="240" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
-            <path d="M 150 705 L 160 705 L 166 730 L 144 730 Z" fill="#475569" stroke="#0f172a" />
-            <path d="M 180 705 L 190 705 L 196 730 L 174 730 Z" fill="#475569" stroke="#0f172a" />
-            <path d="M 210 705 L 220 705 L 226 730 L 204 730 Z" fill="#475569" stroke="#0f172a" />
-            <path d="M 240 705 L 250 705 L 256 730 L 234 730 Z" fill="#475569" stroke="#0f172a" />
-          </g>
-
-          {/* Solid Rocket Boosters (SRBs) */}
-          <g onClick={() => setStage('srb')} className={getStageClass('srb')}>
-            {/* Left SRB */}
-            <rect x="100" y="240" width="40" height="470" fill="#f8fafc" stroke="#0f172a" rx="4"/>
-            <polygon points="100,240 120,180 140,240" fill="#cbd5e1" stroke="#0f172a"/>
-            <rect x="100" y="340" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-            <rect x="100" y="460" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-            <rect x="100" y="580" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-            
-            {/* Right SRB */}
-            <rect x="260" y="240" width="40" height="470" fill="#f8fafc" stroke="#0f172a" rx="4"/>
-            <polygon points="260,240 280,180 300,240" fill="#cbd5e1" stroke="#0f172a"/>
-            <rect x="260" y="340" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-            <rect x="260" y="460" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-            <rect x="260" y="580" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-          </g>
-
-          {/* Core Stage */}
-          <g onClick={() => setStage('core')} className={getStageClass('core')}>
-            <rect x="140" y="260" width="120" height="440" fill="#ea580c" stroke="#0f172a" rx="4"/>
-            <rect x="140" y="320" width="120" height="15" fill="#c2410c" stroke="#0f172a"/>
-            <rect x="140" y="420" width="120" height="4" fill="#c2410c" stroke="#0f172a"/>
-            <rect x="140" y="620" width="120" height="4" fill="#c2410c" stroke="#0f172a"/>
-            <text x="200" y="520" fill="#9a3412" fontSize="30" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle" transform="rotate(-90 200 520)">SLS</text>
-          </g>
-
-          {/* ICPS */}
-          <g onClick={() => setStage('icps')} className={getStageClass('icps')}>
-            <polygon points="140,260 260,260 242,210 158,210" fill="#f8fafc" stroke="#0f172a"/>
-            <rect x="158" y="170" width="84" height="40" fill="#e2e8f0" stroke="#0f172a"/>
-          </g>
-
-          {/* Orion Spacecraft */}
-          <g onClick={() => setStage('orion')} className={getStageClass('orion')}>
-            {/* Service Module */}
-            <rect x="158" y="130" width="84" height="40" fill="#cbd5e1" stroke="#0f172a"/>
-            <rect x="155" y="140" width="90" height="6" fill="#334155" stroke="#0f172a"/>
-            <rect x="155" y="160" width="90" height="6" fill="#334155" stroke="#0f172a"/>
-            {/* Capsule */}
-            <polygon points="158,130 242,130 225,100 175,100" fill="#f8fafc" stroke="#0f172a"/>
-          </g>
-
-          {/* Launch Abort System (LAS) */}
-          <g onClick={() => setStage('las')} className={getStageClass('las')}>
-            <polygon points="175,100 225,100 208,60 192,60" fill="#f8fafc" stroke="#0f172a"/>
-            <rect x="190" y="55" width="20" height="8" fill="#e2e8f0" stroke="#0f172a" rx="2" />
-            <rect x="195" y="20" width="10" height="35" fill="#f8fafc" stroke="#0f172a"/>
-            <polygon points="195,20 205,20 200,0" fill="#f8fafc" stroke="#0f172a"/>
-          </g>
-        </svg>
-      </div>
-
-      {/* Right: Stage Information */}
-      <div className="flex flex-col justify-center">
+    <div className="flex flex-col">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white border border-black p-4 md:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)]">
         
-        <div className="border-l-4 border-black pl-6">
-          <h2 className="text-3xl md:text-4xl font-sans font-black uppercase mb-4 tracking-tight">
-            {rocketStages[stage].title}
-          </h2>
-          
-          <p className="text-lg text-gray-700 font-serif mb-8 leading-relaxed">
-            {rocketStages[stage].desc}
-          </p>
-          
-          <div className="grid grid-cols-2 gap-4">
-            {Object.entries(rocketStages[stage].stats).map(([key, value]) => (
-              <div key={key} className="border-t-2 border-black pt-2">
-                <div className="text-gray-500 font-sans text-xs font-bold mb-1 uppercase tracking-widest">{key}</div>
-                <div className="text-xl font-sans font-bold text-black">{value}</div>
-              </div>
-            ))}
+        {/* Left: Interactive Schematic SVG */}
+        <div className="flex justify-center h-[500px] md:h-[600px] bg-slate-900 rounded border border-gray-300 p-4 relative pattern-grid-lg overflow-hidden">
+          {/* Helper text overlay */}
+          <div className="absolute top-4 left-4 bg-white border border-black px-3 py-1 font-sans text-xs uppercase font-bold flex items-center gap-2 shadow-sm z-10">
+             <Info className="w-3 h-3" /> Select a component
           </div>
+
+          <svg viewBox="0 0 400 800" className="w-full h-full drop-shadow-2xl">
+            {/* Launch Pad Base */}
+            <rect x="80" y="730" width="240" height="20" fill="#1e293b" rx="2" stroke="#0f172a" strokeWidth="2" />
+            <rect x="180" y="710" width="40" height="20" fill="#334155" stroke="#0f172a" strokeWidth="2" />
+
+            {/* RS-25 Engines */}
+            <g onClick={() => setStage('engines')} className={getStageClass('engines')}>
+              <rect x="150" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
+              <rect x="180" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
+              <rect x="210" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
+              <rect x="240" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
+              <path d="M 150 705 L 160 705 L 166 730 L 144 730 Z" fill="#475569" stroke="#0f172a" />
+              <path d="M 180 705 L 190 705 L 196 730 L 174 730 Z" fill="#475569" stroke="#0f172a" />
+              <path d="M 210 705 L 220 705 L 226 730 L 204 730 Z" fill="#475569" stroke="#0f172a" />
+              <path d="M 240 705 L 250 705 L 256 730 L 234 730 Z" fill="#475569" stroke="#0f172a" />
+            </g>
+
+            {/* Solid Rocket Boosters (SRBs) */}
+            <g onClick={() => setStage('srb')} className={getStageClass('srb')}>
+              {/* Left SRB */}
+              <rect x="100" y="240" width="40" height="470" fill="#f8fafc" stroke="#0f172a" rx="4"/>
+              <polygon points="100,240 120,180 140,240" fill="#cbd5e1" stroke="#0f172a"/>
+              <rect x="100" y="340" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="100" y="460" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="100" y="580" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
+              
+              {/* Right SRB */}
+              <rect x="260" y="240" width="40" height="470" fill="#f8fafc" stroke="#0f172a" rx="4"/>
+              <polygon points="260,240 280,180 300,240" fill="#cbd5e1" stroke="#0f172a"/>
+              <rect x="260" y="340" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="260" y="460" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="260" y="580" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
+            </g>
+
+            {/* Core Stage */}
+            <g onClick={() => setStage('core')} className={getStageClass('core')}>
+              <rect x="140" y="260" width="120" height="440" fill="#ea580c" stroke="#0f172a" rx="4"/>
+              <rect x="140" y="320" width="120" height="15" fill="#c2410c" stroke="#0f172a"/>
+              <rect x="140" y="420" width="120" height="4" fill="#c2410c" stroke="#0f172a"/>
+              <rect x="140" y="620" width="120" height="4" fill="#c2410c" stroke="#0f172a"/>
+              <text x="200" y="520" fill="#9a3412" fontSize="30" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle" transform="rotate(-90 200 520)">SLS</text>
+            </g>
+
+            {/* ICPS */}
+            <g onClick={() => setStage('icps')} className={getStageClass('icps')}>
+              <polygon points="140,260 260,260 242,210 158,210" fill="#f8fafc" stroke="#0f172a"/>
+              <rect x="158" y="170" width="84" height="40" fill="#e2e8f0" stroke="#0f172a"/>
+            </g>
+
+            {/* Orion Spacecraft */}
+            <g onClick={() => setStage('orion')} className={getStageClass('orion')}>
+              {/* Service Module */}
+              <rect x="158" y="130" width="84" height="40" fill="#cbd5e1" stroke="#0f172a"/>
+              <rect x="155" y="140" width="90" height="6" fill="#334155" stroke="#0f172a"/>
+              <rect x="155" y="160" width="90" height="6" fill="#334155" stroke="#0f172a"/>
+              {/* Capsule */}
+              <polygon points="158,130 242,130 225,100 175,100" fill="#f8fafc" stroke="#0f172a"/>
+            </g>
+
+            {/* Launch Abort System (LAS) */}
+            <g onClick={() => setStage('las')} className={getStageClass('las')}>
+              <polygon points="175,100 225,100 208,60 192,60" fill="#f8fafc" stroke="#0f172a"/>
+              <rect x="190" y="55" width="20" height="8" fill="#e2e8f0" stroke="#0f172a" rx="2" />
+              <rect x="195" y="20" width="10" height="35" fill="#f8fafc" stroke="#0f172a"/>
+              <polygon points="195,20 205,20 200,0" fill="#f8fafc" stroke="#0f172a"/>
+            </g>
+          </svg>
         </div>
 
+        {/* Right: Stage Information */}
+        <div className="flex flex-col justify-center">
+          
+          <div className="border-l-4 border-black pl-6">
+            <h2 className="text-3xl md:text-4xl font-sans font-black uppercase mb-4 tracking-tight">
+              {rocketStages[stage].title}
+            </h2>
+            
+            <p className="text-lg text-gray-700 font-serif mb-8 leading-relaxed">
+              {rocketStages[stage].desc}
+            </p>
+            
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(rocketStages[stage].stats).map(([key, value]) => (
+                <div key={key} className="border-t-2 border-black pt-2">
+                  <div className="text-gray-500 font-sans text-xs font-bold mb-1 uppercase tracking-widest">{key}</div>
+                  <div className="text-xl font-sans font-bold text-black">{value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
+        Schematic & Technical Data Source: NASA
       </div>
     </div>
   );
@@ -431,145 +452,150 @@ function TimelineGraphic() {
   const pos = getShipPosition(currentStep);
 
   return (
-    <div className="bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-      
-      <div className="p-4 md:p-6 bg-black text-white rounded-sm">
+    <div className="flex flex-col">
+      <div className="bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         
-        {/* 2D Space Visualizer */}
-        <div className="relative w-full bg-slate-950 rounded-sm overflow-hidden mb-8 border border-gray-800">
-          <svg viewBox="0 0 800 400" className="w-full h-auto">
-            <rect width="100%" height="100%" fill="#020617" />
-            
-            {/* Stars */}
-            {stars.map((star, i) => (
-              <circle key={i} cx={star.x} cy={star.y} r={star.r} fill="#fff" opacity={star.opacity * 0.8} />
-            ))}
+        <div className="p-4 md:p-6 bg-black text-white rounded-sm">
+          
+          {/* 2D Space Visualizer */}
+          <div className="relative w-full bg-slate-950 rounded-sm overflow-hidden mb-8 border border-gray-800">
+            <svg viewBox="0 0 800 400" className="w-full h-auto">
+              <rect width="100%" height="100%" fill="#020617" />
+              
+              {/* Stars */}
+              {stars.map((star, i) => (
+                <circle key={i} cx={star.x} cy={star.y} r={star.r} fill="#fff" opacity={star.opacity * 0.8} />
+              ))}
 
-            {/* Path Legend (Colored) */}
-            <g fontFamily="sans-serif" fontSize="11" fontWeight="bold" letterSpacing="1">
-              <text x="20" y="30" fill="#3b82f6">EARTH ORBITS</text>
-              <text x="140" y="30" fill="#22c55e">OUTBOUND</text>
-              <text x="230" y="30" fill="#a855f7">RETURN</text>
-              <text x="310" y="30" fill="#ef4444">RE-ENTRY</text>
-            </g>
-
-            {/* Earth Orbits */}
-            <path
-              d="M 210, 160
-                 A 75, 75 0 0 0 70, 200
-                 A 90, 90 0 0 0 250, 200
-                 A 110, 110 0 0 0 30, 200
-                 A 120, 130 0 0 0 150, 330"
-              fill="none" stroke="#3b82f6" strokeWidth="2.5" strokeDasharray="5,5" opacity="0.8"
-            />
-            {/* Outbound */}
-            <path
-              d="M 150, 330 C 400, 330  400, 130  650, 130"
-              fill="none" stroke="#22c55e" strokeWidth="2.5" strokeDasharray="5,5" opacity="0.8"
-            />
-            {/* Moon Flyby & Return */}
-            <path
-              d="M 650, 130 A 70, 70 0 0 1 650, 270 C 400, 270  400, 70   150, 70"
-              fill="none" stroke="#a855f7" strokeWidth="2.5" strokeDasharray="5,5" opacity="0.8"
-            />
-            {/* Re-entry */}
-            <path
-              d="M 150, 70 C 50, 70    30, 200   85, 240"
-              fill="none" stroke="#ef4444" strokeWidth="2.5" strokeDasharray="5,5" opacity="0.8"
-            />
-
-            {/* Earth */}
-            <g>
-              <defs>
-                <clipPath id="earth-clip">
-                  <circle cx="150" cy="200" r="65" />
-                </clipPath>
-              </defs>
-              <circle cx="150" cy="200" r="65" fill="#0284c7" />
-              <g clipPath="url(#earth-clip)">
-                <path d="M 100 150 Q 120 130 150 140 T 180 160 Q 150 200 120 180 Z" fill="#16a34a" />
-                <path d="M 160 250 Q 180 230 200 240 T 220 260 Q 190 280 150 270 Z" fill="#16a34a" />
+              {/* Path Legend (Colored) */}
+              <g fontFamily="sans-serif" fontSize="11" fontWeight="bold" letterSpacing="1">
+                <text x="20" y="30" fill="#3b82f6">EARTH ORBITS</text>
+                <text x="140" y="30" fill="#22c55e">OUTBOUND</text>
+                <text x="230" y="30" fill="#a855f7">RETURN</text>
+                <text x="310" y="30" fill="#ef4444">RE-ENTRY</text>
               </g>
-              <circle cx="150" cy="200" r="72" fill="none" stroke="#38bdf8" strokeWidth="2" opacity="0.3"/>
-              <text x="150" y="205" fill="#fff" fontSize="13" fontWeight="bold" fontFamily="sans-serif" letterSpacing="1" textAnchor="middle">EARTH</text>
-            </g>
 
-            {/* Moon */}
-            <g>
-              <circle cx="650" cy="200" r="24" fill="#94a3b8" />
-              <circle cx="642" cy="192" r="4" fill="#64748b" opacity="0.5"/>
-              <circle cx="658" cy="208" r="6" fill="#64748b" opacity="0.5"/>
-              <circle cx="638" cy="212" r="3" fill="#64748b" opacity="0.5"/>
-              <text x="650" y="245" fill="#fff" fontSize="11" fontWeight="bold" fontFamily="sans-serif" letterSpacing="1" opacity="0.8" textAnchor="middle">MOON</text>
-            </g>
-
-            {/* Orion Spacecraft */}
-            <g 
-              style={{ 
-                transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.r}deg)`, 
-                transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)' 
-              }}
-            >
-              <polygon points="-12,-8 12,0 -12,8 -6,0" fill="#f8fafc" />
-              <polygon 
-                points="-12,-3 -20,0 -12,3" 
-                fill="#f97316" 
-                className={`transition-opacity duration-500 ${[0, 2, 3, 5].includes(currentStep) ? 'opacity-100' : 'opacity-0'}`} 
+              {/* Earth Orbits */}
+              <path
+                d="M 210, 160
+                   A 75, 75 0 0 0 70, 200
+                   A 90, 90 0 0 0 250, 200
+                   A 110, 110 0 0 0 30, 200
+                   A 120, 130 0 0 0 150, 330"
+                fill="none" stroke="#3b82f6" strokeWidth="2.5" strokeDasharray="5,5" opacity="0.8"
               />
-            </g>
-          </svg>
-        </div>
+              {/* Outbound */}
+              <path
+                d="M 150, 330 C 400, 330  400, 130  650, 130"
+                fill="none" stroke="#22c55e" strokeWidth="2.5" strokeDasharray="5,5" opacity="0.8"
+              />
+              {/* Moon Flyby & Return */}
+              <path
+                d="M 650, 130 A 70, 70 0 0 1 650, 270 C 400, 270  400, 70   150, 70"
+                fill="none" stroke="#a855f7" strokeWidth="2.5" strokeDasharray="5,5" opacity="0.8"
+              />
+              {/* Re-entry */}
+              <path
+                d="M 150, 70 C 50, 70    30, 200   85, 240"
+                fill="none" stroke="#ef4444" strokeWidth="2.5" strokeDasharray="5,5" opacity="0.8"
+              />
 
-        {/* Active Step Information */}
-        <div className="mb-8 border-l-4 border-white pl-6">
-          <div className="text-gray-400 font-bold mb-2 tracking-widest font-sans uppercase text-xs">
-            Phase {currentStep + 1} • {timelineSteps[currentStep].time}
+              {/* Earth */}
+              <g>
+                <defs>
+                  <clipPath id="earth-clip">
+                    <circle cx="150" cy="200" r="65" />
+                  </clipPath>
+                </defs>
+                <circle cx="150" cy="200" r="65" fill="#0284c7" />
+                <g clipPath="url(#earth-clip)">
+                  <path d="M 100 150 Q 120 130 150 140 T 180 160 Q 150 200 120 180 Z" fill="#16a34a" />
+                  <path d="M 160 250 Q 180 230 200 240 T 220 260 Q 190 280 150 270 Z" fill="#16a34a" />
+                </g>
+                <circle cx="150" cy="200" r="72" fill="none" stroke="#38bdf8" strokeWidth="2" opacity="0.3"/>
+                <text x="150" y="205" fill="#fff" fontSize="13" fontWeight="bold" fontFamily="sans-serif" letterSpacing="1" textAnchor="middle">EARTH</text>
+              </g>
+
+              {/* Moon */}
+              <g>
+                <circle cx="650" cy="200" r="24" fill="#94a3b8" />
+                <circle cx="642" cy="192" r="4" fill="#64748b" opacity="0.5"/>
+                <circle cx="658" cy="208" r="6" fill="#64748b" opacity="0.5"/>
+                <circle cx="638" cy="212" r="3" fill="#64748b" opacity="0.5"/>
+                <text x="650" y="245" fill="#fff" fontSize="11" fontWeight="bold" fontFamily="sans-serif" letterSpacing="1" opacity="0.8" textAnchor="middle">MOON</text>
+              </g>
+
+              {/* Orion Spacecraft */}
+              <g 
+                style={{ 
+                  transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.r}deg)`, 
+                  transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)' 
+                }}
+              >
+                <polygon points="-12,-8 12,0 -12,8 -6,0" fill="#f8fafc" />
+                <polygon 
+                  points="-12,-3 -20,0 -12,3" 
+                  fill="#f97316" 
+                  className={`transition-opacity duration-500 ${[0, 2, 3, 5].includes(currentStep) ? 'opacity-100' : 'opacity-0'}`} 
+                />
+              </g>
+            </svg>
           </div>
-          <h2 className="text-3xl font-bold font-sans uppercase text-white mb-3">
-            {timelineSteps[currentStep].title}
-          </h2>
-          <p className="text-lg text-gray-300 font-serif leading-relaxed max-w-3xl">
-            {timelineSteps[currentStep].desc}
-          </p>
-        </div>
 
-        {/* Timeline Controls (Newspaper style) */}
-        <div className="relative">
-          <div className="flex items-start overflow-x-auto pb-4 pt-2 px-2 snap-x custom-scrollbar">
-            {timelineSteps.map((step, idx) => (
-              <div key={idx} className="flex flex-col items-center relative min-w-[120px] snap-center shrink-0 group cursor-pointer" onClick={() => setCurrentStep(idx)}>
-                
-                {/* Connecting line */}
-                {idx !== 0 && (
-                  <div className={`absolute top-4 -left-[50%] w-full h-0.5 -z-10 transition-colors duration-500 ${
-                    idx <= currentStep ? 'bg-white' : 'bg-gray-800'
-                  }`}></div>
-                )}
-                
-                {/* Timeline Node */}
-                <button
-                  className={`w-8 h-8 rounded-full flex items-center justify-center font-bold font-sans text-sm transition-all duration-300 z-10 border-2 ${
-                    idx === currentStep 
-                      ? 'bg-white text-black border-white scale-125' :
-                    idx < currentStep 
-                      ? 'bg-gray-800 text-white border-gray-800 group-hover:bg-gray-700' 
-                      : 'bg-black text-gray-500 border-gray-800 group-hover:border-gray-600'
-                  }`}
-                >
-                  {idx + 1}
-                </button>
-                
-                {/* Step Label */}
-                <span className={`mt-4 text-xs font-bold font-sans uppercase text-center px-2 transition-colors ${
-                  idx === currentStep ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'
-                }`}>
-                  {step.title}
-                </span>
-              </div>
-            ))}
+          {/* Active Step Information */}
+          <div className="mb-8 border-l-4 border-white pl-6">
+            <div className="text-gray-400 font-bold mb-2 tracking-widest font-sans uppercase text-xs">
+              Phase {currentStep + 1} • {timelineSteps[currentStep].time}
+            </div>
+            <h2 className="text-3xl font-bold font-sans uppercase text-white mb-3">
+              {timelineSteps[currentStep].title}
+            </h2>
+            <p className="text-lg text-gray-300 font-serif leading-relaxed max-w-3xl">
+              {timelineSteps[currentStep].desc}
+            </p>
           </div>
-        </div>
 
+          {/* Timeline Controls (Newspaper style) */}
+          <div className="relative">
+            <div className="flex items-start overflow-x-auto pb-4 pt-2 px-2 snap-x custom-scrollbar">
+              {timelineSteps.map((step, idx) => (
+                <div key={idx} className="flex flex-col items-center relative min-w-[120px] snap-center shrink-0 group cursor-pointer" onClick={() => setCurrentStep(idx)}>
+                  
+                  {/* Connecting line */}
+                  {idx !== 0 && (
+                    <div className={`absolute top-4 -left-[50%] w-full h-0.5 -z-10 transition-colors duration-500 ${
+                      idx <= currentStep ? 'bg-white' : 'bg-gray-800'
+                    }`}></div>
+                  )}
+                  
+                  {/* Timeline Node */}
+                  <button
+                    className={`w-8 h-8 rounded-full flex items-center justify-center font-bold font-sans text-sm transition-all duration-300 z-10 border-2 ${
+                      idx === currentStep 
+                        ? 'bg-white text-black border-white scale-125' :
+                      idx < currentStep 
+                        ? 'bg-gray-800 text-white border-gray-800 group-hover:bg-gray-700' 
+                        : 'bg-black text-gray-500 border-gray-800 group-hover:border-gray-600'
+                    }`}
+                  >
+                    {idx + 1}
+                  </button>
+                  
+                  {/* Step Label */}
+                  <span className={`mt-4 text-xs font-bold font-sans uppercase text-center px-2 transition-colors ${
+                    idx === currentStep ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'
+                  }`}>
+                    {step.title}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
+        Mission Profile & Orbit Data Source: NASA
       </div>
     </div>
   );
