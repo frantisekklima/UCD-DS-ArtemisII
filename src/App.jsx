@@ -4,6 +4,11 @@ import { Info, Map, Rocket, UserSquare2, ChevronDown, ChevronUp, ExternalLink } 
 // --- DATA ---
 
 const rocketStages = {
+  sls: {
+    title: 'Space Launch System (SLS)',
+    desc: 'The Space Launch System is a super heavy-lift expendable launch vehicle, providing the foundation for human exploration beyond Earth\'s orbit. With its unprecedented power and capabilities, SLS is the only rocket that can send Orion, astronauts, and cargo to the Moon on a single mission.',
+    stats: { Thrust: '8.8M lbs', Payload: '95,000 lbs to LEO' }
+  },
   las: { 
     title: 'Launch Abort System', 
     desc: 'Positioned on the very top of the SLS, the LAS is designed to safely pull the Orion crew module away from the rocket in the event of an emergency during launch or ascent.', 
@@ -18,6 +23,11 @@ const rocketStages = {
     title: 'Interim Cryogenic Propulsion Stage', 
     desc: 'The upper stage powered by one RL10 engine. It will perform the critical Trans-Lunar Injection (TLI) burn, accelerating Orion out of Earth orbit towards the Moon.', 
     stats: { Thrust: '24,750 lbs', Fuel: 'Liquid H2 / O2' } 
+  },
+  lvsa: {
+    title: 'Launch Vehicle Stage Adapter',
+    desc: 'The cone-shaped Launch Vehicle Stage Adapter (LVSA) connects the massive Core Stage to the upper stages. It also partially encloses and protects the engine of the Interim Cryogenic Propulsion Stage (ICPS) during launch.',
+    stats: { Height: '27.5 ft', Diameter: '27.5 ft to 16.7 ft' }
   },
   core: { 
     title: 'SLS Core Stage', 
@@ -59,7 +69,7 @@ const crewData = [
     bio: 'Wiseman served as flight engineer aboard the ISS for Expedition 41 in 2014, logging 165 days in space. Before his assignment, he served as chief of the Astronaut Office. He is a designated Naval Aviator and former test pilot.',
     initials: 'RW',
     photoUrl: '/wiseman.jpg',
-    link: 'https://www.nasa.gov/people/reid-wiseman/',
+    link: 'https://www.nasa.gov/astronauts/biographies/g-reid-wiseman',
     color: 'text-blue-700 bg-blue-50 border-blue-200'
   },
   {
@@ -69,7 +79,7 @@ const crewData = [
     bio: 'Glover flew as pilot on NASA\'s SpaceX Crew-1 mission in 2020, logging 168 days in space. He participated in four spacewalks and is a former U.S. Navy test pilot with extensive combat experience.',
     initials: 'VG',
     photoUrl: '/glover.jpg',
-    link: 'https://www.nasa.gov/people/victor-j-glover-jr/',
+    link: 'https://www.nasa.gov/astronauts/biographies/victor-j-glover',
     color: 'text-red-700 bg-red-50 border-red-200'
   },
   {
@@ -79,7 +89,7 @@ const crewData = [
     bio: 'Koch holds the record for the longest single spaceflight by a woman (328 days) and participated in the first all-female spacewalk. She has served as a flight engineer on the ISS for three expeditions.',
     initials: 'CK',
     photoUrl: '/koch.jpg',
-    link: 'https://www.nasa.gov/people/christina-koch/',
+    link: 'https://www.nasa.gov/astronauts/biographies/christina-hammock-koch',
     color: 'text-emerald-700 bg-emerald-50 border-emerald-200'
   },
   {
@@ -100,129 +110,170 @@ export default function App() {
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
-    <div className="min-h-screen bg-[#f9f9f9] text-black font-serif selection:bg-gray-300">
-      {/* CSS Injection for hide-scrollbar */}
-      <style dangerouslySetInnerHTML={{__html: `
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .custom-scrollbar::-webkit-scrollbar { height: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #262626; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #525252; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #737373; }
-        .drop-cap::first-letter { font-size: 3.5rem; float: left; margin-right: 0.5rem; line-height: 0.8; font-weight: 900; }
-      `}} />
+    <div className="min-h-screen bg-[#f9f9f9] text-black font-serif selection:bg-gray-300 relative overflow-x-hidden">
+      
+      {/* Fixed Background Image Fading into the Page */}
+      <div className="fixed top-0 right-0 w-[150vw] sm:w-[100vw] md:w-[70vw] h-[60vh] md:h-[80vh] z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-no-repeat bg-cover bg-right-top opacity-40 mix-blend-multiply" style={{ backgroundImage: "url('/backgroundrocket.jpg')" }}></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f9f9f9]"></div>
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#f9f9f9]/20 to-[#f9f9f9]"></div>
+      </div>
 
-      {/* Newspaper Header */}
-      <header className="max-w-4xl mx-auto px-4 pt-8 pb-4">
-        <div className="border-b-4 border-double border-black pb-4 text-center">
-          <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-2" style={{ fontFamily: 'Georgia, serif' }}>
-            The Story Teller
-          </h1>
-          <div className="flex justify-between items-center text-xs md:text-sm font-sans uppercase tracking-widest border-t border-black pt-2 font-bold text-gray-700">
-            <span>Special Interactive Edition</span>
-            <span>{currentDate}</span>
-            <span>Science & Technology</span>
+      <div className="relative z-10">
+        {/* CSS Injection for hide-scrollbar */}
+        <style dangerouslySetInnerHTML={{__html: `
+          .hide-scrollbar::-webkit-scrollbar { display: none; }
+          .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+          .custom-scrollbar::-webkit-scrollbar { height: 8px; }
+          .custom-scrollbar::-webkit-scrollbar-track { background: #262626; border-radius: 4px; }
+          .custom-scrollbar::-webkit-scrollbar-thumb { background: #525252; border-radius: 4px; }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #737373; }
+          .drop-cap::first-letter { font-size: 3.5rem; float: left; margin-right: 0.5rem; line-height: 0.8; font-weight: 900; }
+        `}} />
+
+        {/* Newspaper Header */}
+        <header className="max-w-4xl mx-auto px-4 pt-8 pb-4">
+          <div className="border-b-4 border-double border-black pb-4 text-center">
+            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+              The Story Teller
+            </h1>
+            <div className="flex justify-between items-center text-xs md:text-sm font-sans uppercase tracking-widest border-t border-black pt-2 font-bold text-gray-700">
+              <span>Special Interactive Edition</span>
+              <span>{currentDate}</span>
+              <span>Science & Technology</span>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Article Body */}
-      <main className="max-w-4xl mx-auto px-4 pb-20">
-        
-        {/* Headline Section */}
-        <div className="mb-12 text-center mt-8">
-          <h2 className="text-4xl md:text-6xl font-extrabold leading-none mb-6">
-            RETURN TO THE LUNAR REALM
-          </h2>
-          <p className="text-xl md:text-2xl italic text-gray-600 max-w-3xl mx-auto">
-            Fifty years after Apollo, four astronauts prepare to ride the most powerful rocket ever built on a historic voyage around the Moon.
-          </p>
-          <div className="mt-8 flex items-center justify-center gap-4 text-sm font-sans uppercase font-bold text-gray-800">
-            <span>By The Science Desk</span>
-            <span className="w-1.5 h-1.5 bg-black rounded-full"></span>
-            <span>Interactive Feature</span>
+        {/* Article Body */}
+        <main className="max-w-4xl mx-auto px-4 pb-20">
+          
+          {/* Headline Section */}
+          <div className="mb-12 text-center mt-8">
+            <h2 className="text-4xl md:text-6xl font-extrabold leading-none mb-6">
+              RETURN TO THE LUNAR REALM
+            </h2>
+            <p className="text-xl md:text-2xl italic text-gray-600 max-w-3xl mx-auto">
+              Fifty years after Apollo, four astronauts prepare to ride the most powerful rocket ever built on a historic voyage around the Moon.
+            </p>
+            <div className="mt-8 flex items-center justify-center gap-4 text-sm font-sans uppercase font-bold text-gray-800">
+              <span>By The Science Desk</span>
+              <span className="w-1.5 h-1.5 bg-black rounded-full"></span>
+              <span>Interactive Feature</span>
+            </div>
           </div>
-        </div>
 
-        {/* Introduction & History */}
-        <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-16">
-          <p className="drop-cap">
-            In December 1972, Apollo 17 Commander Eugene Cernan left the final human footprints in the lunar dust. As he departed, he spoke of a promise to return. For over half a century, that promise remained unfulfilled, as humanity's gaze shifted to low-Earth orbit, the Space Shuttle, and the construction of the International Space Station. 
-          </p>
-          <p>
-            Now, the Artemis program aims to close that gap. Following the successful uncrewed flight of Artemis I in 2022, NASA is preparing for the next monumental step. Artemis II is not just a mission; it is a declaration that the era of deep space exploration has been reborn. This mission will test the foundational human deep space exploration capabilities, the Space Launch System (SLS) rocket, and the Orion spacecraft.
-          </p>
-        </article>
+          {/* Introduction & History */}
+          <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-16">
+            <p className="drop-cap">
+              In December 1972, Apollo 17 Commander Eugene Cernan left the final human footprints in the lunar dust. As he departed, he spoke of a promise to return. For over half a century, that promise remained unfulfilled, as humanity's gaze shifted to low-Earth orbit, the Space Shuttle, and the construction of the International Space Station. 
+            </p>
+            <p>
+              Now, the Artemis program aims to close that gap. Following the successful uncrewed flight of Artemis I in 2022, NASA is preparing for the next monumental step. Artemis II is not just a mission; it is a declaration that the era of deep space exploration has been reborn. This mission will test the foundational human deep space exploration capabilities, the Space Launch System (SLS) rocket, and the Orion spacecraft.
+            </p>
+          </article>
 
-        {/* The Crew Section */}
-        <section className="mb-16">
-          <SectionHeader icon={UserSquare2} title="The Vanguard: Meet the Crew" />
-          <p className="font-serif text-lg mb-8 text-gray-800">
-            The Artemis II mission is crewed by four exceptional individuals representing a new, diverse generation of explorers. Their selection marks the first time a woman, a person of color, and a Canadian will fly to the lunar vicinity.
-          </p>
-          <div className="flex flex-col gap-4">
-            {crewData.map((member, i) => (
-              <CrewCard key={i} member={member} />
-            ))}
-          </div>
-          <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
-            Data & Biographies Source: NASA / CSA
-          </div>
-        </section>
+          {/* The Crew Section */}
+          <section className="mb-16">
+            <SectionHeader icon={UserSquare2} title="The Vanguard: Meet the Crew" />
+            <p className="font-serif text-lg mb-8 text-gray-800">
+              The Artemis II mission is crewed by four exceptional individuals representing a new, diverse generation of explorers. Their selection marks the first time a woman, a person of color, and a Canadian will fly to the lunar vicinity.
+            </p>
+            <div className="flex flex-col gap-4">
+              {crewData.map((member, i) => (
+                <CrewCard key={i} member={member} />
+              ))}
+            </div>
+            <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
+              Data & Biographies Source: NASA / CSA
+            </div>
+          </section>
 
-        {/* The Hardware Section */}
-        <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
-          <p>
-            To break the bonds of Earth's gravity, you need immense power. Enter the Space Launch System (SLS), a super heavy-lift launch vehicle that stands as the modern successor to the Saturn V. While it utilizes legacy Space Shuttle technology—including its famously efficient RS-25 engines and elongated solid rocket boosters—it is an entirely new beast designed explicitly for deep space.
-          </p>
-          <p>
-            The interactive schematic below details the monumental engineering required to propel the Orion spacecraft—the crew's temporary home—out of Earth's orbit and toward the lunar surface.
-          </p>
-        </article>
+          {/* The Hardware Section */}
+          <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
+            <p>
+              To break the bonds of Earth's gravity, you need immense power. Enter the Space Launch System (SLS), a super heavy-lift launch vehicle that stands as the modern successor to the Saturn V. While it utilizes legacy Space Shuttle technology—including its famously efficient RS-25 engines and elongated solid rocket boosters—it is an entirely new beast designed explicitly for deep space.
+            </p>
+            <p>
+              The interactive schematic below details the monumental engineering required to propel the Orion spacecraft—the crew's temporary home—out of Earth's orbit and toward the lunar surface.
+            </p>
+          </article>
 
-        {/* Interactive Rocket SVG */}
-        <section className="mb-16 border-t-2 border-b-2 border-black py-8 bg-white">
-          <SectionHeader icon={Rocket} title="Interactive Schematic: The SLS Rocket" />
-          <RocketGraphic />
-        </section>
+          {/* Interactive Rocket SVG */}
+          <section className="mb-16 border-t-2 border-b-2 border-black py-8 bg-white">
+            <SectionHeader icon={Rocket} title="Interactive Schematic: The SLS Rocket" />
+            <RocketGraphic />
+          </section>
 
-        {/* The Journey Section */}
-        <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
-          <p>
-            The 10-day odyssey of Artemis II is a complex ballet of orbital mechanics. Unlike the direct Apollo missions, Artemis II will employ a highly elliptical High Earth Orbit (HEO) to test the life support systems before committing to the translunar coast.
-          </p>
-          <p>
-            Once the massive Trans-Lunar Injection (TLI) burn is executed, Orion will travel on a "free-return trajectory." This means the spacecraft will use the Moon's gravity to slingshot itself back to Earth, requiring no major propulsion to safely return home. The crew will fly 4,600 miles beyond the far side of the Moon, pushing humans further into the solar system than ever before.
-          </p>
-        </article>
+          {/* The Orion Spacecraft Section */}
+          <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
+            <p>
+              Once the towering SLS has completed its job of breaking Earth's gravitational grip, the Orion spacecraft will separate and carry the crew the rest of the way. Unlike capsules designed for Low Earth Orbit, Orion is purpose-built for deep space. It features state-of-the-art life support, enhanced radiation protection, and a heat shield capable of withstanding the blistering 5,000°F temperatures of lunar re-entry.
+            </p>
+          </article>
 
-        {/* Interactive Timeline SVG */}
-        <section className="mb-16">
-          <SectionHeader icon={Map} title="Mission Profile: A 10-Day Odyssey" />
-          <TimelineGraphic />
-        </section>
+          {/* Interactive 3D Model: Orion */}
+          <section className="mb-16 bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div className="sketchfab-embed-wrapper w-full aspect-video bg-[#111]">
+              <iframe 
+                title="NASA Orion Spacecraft" 
+                frameBorder="0" 
+                allowFullScreen 
+                allow="autoplay; fullscreen; xr-spatial-tracking" 
+                src="https://sketchfab.com/models/1b783d2e242b4021a9ccdce44a051dc3/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=2&dnt=1"
+                className="w-full h-full"
+              > 
+              </iframe> 
+            </div>
+            <div className="p-4 text-center border-t-2 border-black text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-gray-800 bg-gray-50">
+              Interactive 3D Model: The Orion Crew Module and European Service Module
+            </div>
+          </section>
 
-        {/* Future Section */}
-        <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-16">
-          <p>
-            Artemis II is merely the prologue. If successful, it sets the stage for Artemis III, which plans to return boots to the lunar surface near the South Pole. It lays the groundwork for the Lunar Gateway, a space station in orbit around the Moon, and a sustained human presence on the lunar surface. 
-          </p>
-          <p>
-            Ultimately, the lessons learned from the Artemis missions will serve as the stepping stones for humanity's next great leap: a crewed mission to Mars. The hardware is built. The crew is ready. The countdown to a new era of exploration has begun.
-          </p>
-        </article>
+          <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
+            <p>
+              With the crew safely aboard Orion, the true test of the mission begins. Navigating the expanse between the Earth and the Moon requires precision burns and a flawless understanding of celestial mechanics.
+            </p>
+          </article>
 
-        {/* Footer */}
-        <footer className="border-t-4 border-double border-black pt-6 text-center">
-          <h1 className="text-3xl font-black uppercase tracking-tighter mb-4" style={{ fontFamily: 'Georgia, serif' }}>
-            The Story Teller
-          </h1>
-          <p className="font-sans text-xs uppercase tracking-widest text-gray-500 font-bold">
-            &copy; {new Date().getFullYear()} The Story Teller Media • Science & Technology Desk
-          </p>
-        </footer>
+          {/* The Journey Section */}
+          <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
+            <p>
+              The 10-day odyssey of Artemis II is a complex ballet of orbital mechanics. Unlike the direct Apollo missions, Artemis II will employ a highly elliptical High Earth Orbit (HEO) to test the life support systems before committing to the translunar coast.
+            </p>
+            <p>
+              Once the massive Trans-Lunar Injection (TLI) burn is executed, Orion will travel on a "free-return trajectory." This means the spacecraft will use the Moon's gravity to slingshot itself back to Earth, requiring no major propulsion to safely return home. The crew will fly 4,600 miles beyond the far side of the Moon, pushing humans further into the solar system than ever before.
+            </p>
+          </article>
 
-      </main>
+          {/* Interactive Timeline SVG */}
+          <section className="mb-16">
+            <SectionHeader icon={Map} title="Mission Profile: A 10-Day Odyssey" />
+            <TimelineGraphic />
+          </section>
+
+          {/* Future Section */}
+          <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-16">
+            <p>
+              Artemis II is merely the prologue. If successful, it sets the stage for Artemis III, which plans to return boots to the lunar surface near the South Pole. It lays the groundwork for the Lunar Gateway, a space station in orbit around the Moon, and a sustained human presence on the lunar surface. 
+            </p>
+            <p>
+              Ultimately, the lessons learned from the Artemis missions will serve as the stepping stones for humanity's next great leap: a crewed mission to Mars. The hardware is built. The crew is ready. The countdown to a new era of exploration has begun.
+            </p>
+          </article>
+
+          {/* Footer */}
+          <footer className="border-t-4 border-double border-black pt-6 text-center">
+            <h1 className="text-3xl font-black uppercase tracking-tighter mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+              The Story Teller
+            </h1>
+            <p className="font-sans text-xs uppercase tracking-widest text-gray-500 font-bold">
+              &copy; {new Date().getFullYear()} The Story Teller Media • Science & Technology Desk
+            </p>
+          </footer>
+
+        </main>
+      </div>
     </div>
   );
 }
@@ -243,11 +294,13 @@ function CrewCard({ member }) {
              <span className="text-xl sm:text-2xl font-black font-sans tracking-widest absolute inset-0 flex items-center justify-center z-0">{member.initials}</span>
              
              {/* Profile Picture Implementation */}
-             {/* Removed the onError hide so you can see if the browser returns a 404 broken image icon, which helps debug file path issues */}
              <img 
                src={member.photoUrl} 
                alt={member.name}
-               className="absolute inset-0 w-full h-full object-cover z-10"
+               className="absolute inset-0 w-full h-full object-cover z-10 bg-white"
+               onError={(e) => {
+                 e.currentTarget.style.display = 'none';
+               }}
              />
           </div>
           <div className="text-left">
@@ -297,10 +350,10 @@ function SectionHeader({ icon: Icon, title }) {
 
 // --- ROCKET INTERACTIVE GRAPHIC (B&W Redesign) ---
 function RocketGraphic() {
-  const [stage, setStage] = useState('orion');
+  const [stage, setStage] = useState('sls');
 
   const getStageClass = (id) => `cursor-pointer transition-all duration-300 ${
-    stage === id 
+    stage === id || stage === 'sls'
       ? 'opacity-100 stroke-[4px]' 
       : 'opacity-50 hover:opacity-80 stroke-[2px]'
   }`;
@@ -312,75 +365,81 @@ function RocketGraphic() {
         {/* Left: Interactive Schematic SVG */}
         <div className="flex justify-center h-[500px] md:h-[600px] bg-slate-900 rounded border border-gray-300 p-4 relative pattern-grid-lg overflow-hidden">
           {/* Helper text overlay */}
-          <div className="absolute top-4 left-4 bg-white border border-black px-3 py-1 font-sans text-xs uppercase font-bold flex items-center gap-2 shadow-sm z-10">
+          <div className="absolute bottom-4 left-4 bg-white border border-black px-3 py-1 font-sans text-xs uppercase font-bold flex items-center gap-2 shadow-sm z-10 pointer-events-none">
              <Info className="w-3 h-3" /> Select a component
           </div>
 
-          <svg viewBox="0 0 400 800" className="w-full h-full drop-shadow-2xl">
+          <svg viewBox="0 0 400 800" className="w-full h-full drop-shadow-2xl cursor-pointer" onClick={() => setStage('sls')}>
             {/* Launch Pad Base */}
             <rect x="80" y="730" width="240" height="20" fill="#1e293b" rx="2" stroke="#0f172a" strokeWidth="2" />
             <rect x="180" y="710" width="40" height="20" fill="#334155" stroke="#0f172a" strokeWidth="2" />
 
             {/* RS-25 Engines */}
-            <g onClick={() => setStage('engines')} className={getStageClass('engines')}>
-              <rect x="150" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
-              <rect x="180" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
-              <rect x="210" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
-              <rect x="240" y="700" width="10" height="5" fill="#64748b" stroke="#0f172a" />
-              <path d="M 150 705 L 160 705 L 166 730 L 144 730 Z" fill="#475569" stroke="#0f172a" />
-              <path d="M 180 705 L 190 705 L 196 730 L 174 730 Z" fill="#475569" stroke="#0f172a" />
-              <path d="M 210 705 L 220 705 L 226 730 L 204 730 Z" fill="#475569" stroke="#0f172a" />
-              <path d="M 240 705 L 250 705 L 256 730 L 234 730 Z" fill="#475569" stroke="#0f172a" />
+            <g onClick={(e) => { e.stopPropagation(); setStage('engines'); }} className={getStageClass('engines')}>
+              <rect x="169" y="700" width="6" height="5" fill="#64748b" stroke="#0f172a" />
+              <path d="M 169 705 L 175 705 L 179 725 L 165 725 Z" fill="#475569" stroke="#0f172a" />
+              <rect x="186" y="700" width="6" height="5" fill="#64748b" stroke="#0f172a" />
+              <path d="M 186 705 L 192 705 L 196 725 L 182 725 Z" fill="#475569" stroke="#0f172a" />
+              <rect x="208" y="700" width="6" height="5" fill="#64748b" stroke="#0f172a" />
+              <path d="M 208 705 L 214 705 L 218 725 L 204 725 Z" fill="#475569" stroke="#0f172a" />
+              <rect x="225" y="700" width="6" height="5" fill="#64748b" stroke="#0f172a" />
+              <path d="M 225 705 L 231 705 L 235 725 L 221 725 Z" fill="#475569" stroke="#0f172a" />
             </g>
 
             {/* Solid Rocket Boosters (SRBs) */}
-            <g onClick={() => setStage('srb')} className={getStageClass('srb')}>
+            <g onClick={(e) => { e.stopPropagation(); setStage('srb'); }} className={getStageClass('srb')}>
               {/* Left SRB */}
-              <rect x="100" y="240" width="40" height="470" fill="#f8fafc" stroke="#0f172a" rx="4"/>
-              <polygon points="100,240 120,180 140,240" fill="#cbd5e1" stroke="#0f172a"/>
-              <rect x="100" y="340" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-              <rect x="100" y="460" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-              <rect x="100" y="580" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="139" y="280" width="26" height="440" fill="#f8fafc" stroke="#0f172a" rx="2"/>
+              <polygon points="139,280 152,230 165,280" fill="#cbd5e1" stroke="#0f172a"/>
+              <rect x="139" y="380" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="139" y="500" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="139" y="620" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
               
               {/* Right SRB */}
-              <rect x="260" y="240" width="40" height="470" fill="#f8fafc" stroke="#0f172a" rx="4"/>
-              <polygon points="260,240 280,180 300,240" fill="#cbd5e1" stroke="#0f172a"/>
-              <rect x="260" y="340" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-              <rect x="260" y="460" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
-              <rect x="260" y="580" width="40" height="10" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="235" y="280" width="26" height="440" fill="#f8fafc" stroke="#0f172a" rx="2"/>
+              <polygon points="235,280 248,230 261,280" fill="#cbd5e1" stroke="#0f172a"/>
+              <rect x="235" y="380" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="235" y="500" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="235" y="620" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
             </g>
 
             {/* Core Stage */}
-            <g onClick={() => setStage('core')} className={getStageClass('core')}>
-              <rect x="140" y="260" width="120" height="440" fill="#ea580c" stroke="#0f172a" rx="4"/>
-              <rect x="140" y="320" width="120" height="15" fill="#c2410c" stroke="#0f172a"/>
-              <rect x="140" y="420" width="120" height="4" fill="#c2410c" stroke="#0f172a"/>
-              <rect x="140" y="620" width="120" height="4" fill="#c2410c" stroke="#0f172a"/>
-              <text x="200" y="520" fill="#9a3412" fontSize="30" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle" transform="rotate(-90 200 520)">SLS</text>
+            <g onClick={(e) => { e.stopPropagation(); setStage('core'); }} className={getStageClass('core')}>
+              <rect x="165" y="300" width="70" height="400" fill="#ea580c" stroke="#0f172a" rx="2"/>
+              <rect x="165" y="340" width="70" height="15" fill="#c2410c" stroke="#0f172a"/>
+              <rect x="165" y="440" width="70" height="4" fill="#c2410c" stroke="#0f172a"/>
+              <rect x="165" y="620" width="70" height="4" fill="#c2410c" stroke="#0f172a"/>
+              <text x="200" y="520" fill="#9a3412" fontSize="24" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle" transform="rotate(-90 200 520)">SLS</text>
+            </g>
+
+            {/* LVSA (Launch Vehicle Stage Adapter) */}
+            <g onClick={(e) => { e.stopPropagation(); setStage('lvsa'); }} className={getStageClass('lvsa')}>
+              <polygon points="165,300 235,300 223,240 177,240" fill="#ea580c" stroke="#0f172a"/>
+              <rect x="177" y="285" width="46" height="3" fill="#c2410c" opacity="0.5"/>
             </g>
 
             {/* ICPS */}
-            <g onClick={() => setStage('icps')} className={getStageClass('icps')}>
-              <polygon points="140,260 260,260 242,210 158,210" fill="#f8fafc" stroke="#0f172a"/>
-              <rect x="158" y="170" width="84" height="40" fill="#e2e8f0" stroke="#0f172a"/>
+            <g onClick={(e) => { e.stopPropagation(); setStage('icps'); }} className={getStageClass('icps')}>
+              <rect x="177" y="190" width="46" height="50" fill="#e2e8f0" stroke="#0f172a"/>
+              <rect x="177" y="230" width="46" height="4" fill="#cbd5e1" stroke="#0f172a"/>
             </g>
 
             {/* Orion Spacecraft */}
-            <g onClick={() => setStage('orion')} className={getStageClass('orion')}>
+            <g onClick={(e) => { e.stopPropagation(); setStage('orion'); }} className={getStageClass('orion')}>
               {/* Service Module */}
-              <rect x="158" y="130" width="84" height="40" fill="#cbd5e1" stroke="#0f172a"/>
-              <rect x="155" y="140" width="90" height="6" fill="#334155" stroke="#0f172a"/>
-              <rect x="155" y="160" width="90" height="6" fill="#334155" stroke="#0f172a"/>
+              <rect x="177" y="150" width="46" height="40" fill="#cbd5e1" stroke="#0f172a"/>
+              <rect x="174" y="160" width="52" height="4" fill="#334155" stroke="#0f172a"/>
+              <rect x="174" y="175" width="52" height="4" fill="#334155" stroke="#0f172a"/>
               {/* Capsule */}
-              <polygon points="158,130 242,130 225,100 175,100" fill="#f8fafc" stroke="#0f172a"/>
+              <polygon points="177,150 223,150 213,120 187,120" fill="#f8fafc" stroke="#0f172a"/>
             </g>
 
             {/* Launch Abort System (LAS) */}
-            <g onClick={() => setStage('las')} className={getStageClass('las')}>
-              <polygon points="175,100 225,100 208,60 192,60" fill="#f8fafc" stroke="#0f172a"/>
-              <rect x="190" y="55" width="20" height="8" fill="#e2e8f0" stroke="#0f172a" rx="2" />
-              <rect x="195" y="20" width="10" height="35" fill="#f8fafc" stroke="#0f172a"/>
-              <polygon points="195,20 205,20 200,0" fill="#f8fafc" stroke="#0f172a"/>
+            <g onClick={(e) => { e.stopPropagation(); setStage('las'); }} className={getStageClass('las')}>
+              <polygon points="187,120 213,120 204,60 196,60" fill="#f8fafc" stroke="#0f172a"/>
+              <rect x="194" y="55" width="12" height="5" fill="#e2e8f0" stroke="#0f172a" rx="1" />
+              <rect x="198" y="20" width="4" height="35" fill="#f8fafc" stroke="#0f172a"/>
+              <polygon points="198,20 202,20 200,5" fill="#f8fafc" stroke="#0f172a"/>
             </g>
           </svg>
         </div>
@@ -397,7 +456,7 @@ function RocketGraphic() {
               {rocketStages[stage].desc}
             </p>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mb-8">
               {Object.entries(rocketStages[stage].stats).map(([key, value]) => (
                 <div key={key} className="border-t-2 border-black pt-2">
                   <div className="text-gray-500 font-sans text-xs font-bold mb-1 uppercase tracking-widest">{key}</div>
@@ -405,6 +464,10 @@ function RocketGraphic() {
                 </div>
               ))}
             </div>
+
+            <a href="https://www.nasa.gov/humans-in-space/space-launch-system/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase text-blue-600 hover:text-blue-800 transition-colors">
+              Learn more about SLS <ExternalLink className="w-3 h-3" />
+            </a>
           </div>
 
         </div>
