@@ -438,8 +438,8 @@ function RocketGraphic() {
             <g onClick={(e) => { e.stopPropagation(); setStage('las'); }} className={getStageClass('las')}>
               <polygon points="187,120 213,120 204,60 196,60" fill="#f8fafc" stroke="#0f172a"/>
               <rect x="194" y="55" width="12" height="5" fill="#e2e8f0" stroke="#0f172a" rx="1" />
-              <rect x="198" y="20" width="4" height="35" fill="#f8fafc" stroke="#0f172a"/>
-              <polygon points="198,20 202,20 200,5" fill="#f8fafc" stroke="#0f172a"/>
+              <rect x="197" y="20" width="6" height="35" fill="#f8fafc" stroke="#0f172a"/>
+              <polygon points="197,20 203,20 200,5" fill="#f8fafc" stroke="#0f172a"/>
             </g>
           </svg>
         </div>
