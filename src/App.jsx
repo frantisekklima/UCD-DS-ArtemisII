@@ -114,7 +114,7 @@ export default function App() {
       
       {/* Background Image Fading into the Page (Absolute positioning keeps it stuck to top and scrolls away) */}
       <div className="absolute top-0 right-0 w-full sm:w-[80vw] md:w-[55vw] lg:w-[45vw] h-[50vh] md:h-[70vh] z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-no-repeat bg-cover bg-right-top opacity-40 mix-blend-multiply" style={{ backgroundImage: "url('/2269453122.jpg')" }}></div>
+        <div className="absolute inset-0 bg-no-repeat bg-cover bg-right-top opacity-40 mix-blend-multiply" style={{ backgroundImage: "url('/backgroundrocket.jpg')" }}></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f9f9f9]"></div>
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#f9f9f9]/50 to-[#f9f9f9]"></div>
       </div>
