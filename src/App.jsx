@@ -154,10 +154,10 @@ export default function App() {
               RETURN TO THE LUNAR REALM
             </h2>
             <p className="text-xl md:text-2xl italic text-gray-600 max-w-3xl mx-auto">
-              Fifty years after Apollo, four astronauts prepare to ride the most powerful rocket ever built on a historic voyage around the Moon.
+              More than fifty years after Apollo, four astronauts aboard the most advanced spacecraft ever built voyage to the Moon.
             </p>
             <div className="mt-8 flex items-center justify-center gap-4 text-sm font-sans uppercase font-bold text-gray-800">
-              <span>By The Science Desk</span>
+              <span>By Frantisek Klima</span>
               <span className="w-1.5 h-1.5 bg-black rounded-full"></span>
               <span>Interactive Feature</span>
             </div>
@@ -168,8 +168,30 @@ export default function App() {
             <p className="drop-cap">
               In December 1972, Apollo 17 Commander Eugene Cernan left the final human footprints in the lunar dust. As he departed, he spoke of a promise to return. For over half a century, that promise remained unfulfilled, as humanity's gaze shifted to low-Earth orbit, the Space Shuttle, and the construction of the International Space Station. 
             </p>
+            
+            <blockquote className="border-l-8 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 my-10 relative border-y-2 border-r-2">
+              <div className="absolute -top-6 -left-4 text-6xl text-gray-300 font-serif leading-none opacity-50">"</div>
+              <p className="mb-6 italic text-xl md:text-2xl text-gray-800 font-serif leading-relaxed relative z-10">
+                Bob, this is Gene, and I'm on the surface; and, as I take man's last step from the surface, back home for some time to come—but we believe not too long into the future—I'd like to just (say) what I believe history will record: that America's challenge of today has forged man's destiny of tomorrow. And, as we leave the Moon at Taurus–Littrow, we leave as we came and, God willing, as we shall return, with peace and hope for all mankind. Godspeed the crew of Apollo 17.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 border-t-2 border-gray-100 pt-4 not-italic font-sans">
+                <div className="flex flex-col">
+                  <span className="font-bold text-sm uppercase tracking-wider text-black">Commander Eugene Cernan</span>
+                  <span className="text-xs text-gray-500 uppercase font-bold tracking-widest">Apollo 17, Dec 14, 1972</span>
+                </div>
+                <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
+                   <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400">Listen to Historic Broadcast</span>
+                   <audio controls className="w-full sm:w-64 h-8 outline-none">
+                     <source src="/cernan.mp3" type="audio/mpeg" />
+                     Your browser does not support the audio element.
+                   </audio>
+                </div>
+              </div>
+            </blockquote>
+
             <p>
-              Now, the Artemis program aims to close that gap. Following the successful uncrewed flight of Artemis I in 2022, NASA is preparing for the next monumental step. Artemis II is not just a mission; it is a declaration that the era of deep space exploration has been reborn. This mission will test the foundational human deep space exploration capabilities, the Space Launch System (SLS) rocket, and the Orion spacecraft.
+              Now, the Artemis program aims to close that gap. After several delays, NASA has finally launched humans towards the Moon on April 1st, 2026. As many commentators noted, Artemis II is more than a mission; it is a declaration that the era of deep space exploration has been reborn.
             </p>
           </article>
 
@@ -192,23 +214,24 @@ export default function App() {
           {/* The Hardware Section */}
           <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
             <p>
-              To break the bonds of Earth's gravity, you need immense power. Enter the Space Launch System (SLS), a super heavy-lift launch vehicle that stands as the modern successor to the Saturn V. While it utilizes legacy Space Shuttle technology—including its famously efficient RS-25 engines and elongated solid rocket boosters—it is an entirely new beast designed explicitly for deep space.
+              To break the bonds of Earth's gravity, you need immense power. Enter the Space Launch System (SLS), a super heavy-lift launch vehicle that stands as the modern successor to the Saturn V. While it utilizes legacy Space Shuttle technology, including its famously efficient RS-25 engines and elongated solid rocket boosters, it is an entirely new beast designed explicitly for deep space.
             </p>
+            <br></br>
             <p>
-              The interactive schematic below details the monumental engineering required to propel the Orion spacecraft—the crew's temporary home—out of Earth's orbit and toward the lunar surface.
+              The interactive schematic below details what it takes to propel the Orion spacecraft, the crew's temporary home, out of Earth's orbit and toward the lunar surface.
             </p>
           </article>
 
           {/* Interactive Rocket SVG */}
           <section className="mb-16 border-t-2 border-b-2 border-black py-8 bg-white">
-            <SectionHeader icon={Rocket} title="Interactive Schematic: The SLS Rocket" />
+            <SectionHeader icon={Rocket} title="Interactive Schematic of The SLS Rocket" />
             <RocketGraphic />
           </section>
 
           {/* The Orion Spacecraft Section */}
           <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
             <p>
-              Once the towering SLS has completed its job of breaking Earth's gravitational grip, the Orion spacecraft will separate and carry the crew the rest of the way. Unlike capsules designed for Low Earth Orbit, Orion is purpose-built for deep space. It features state-of-the-art life support, enhanced radiation protection, and a heat shield capable of withstanding the blistering 5,000°F temperatures of lunar re-entry.
+              Once the towering SLS has completed its job of breaking Earth's gravitational grip, the Orion spacecraft will separate and carry the crew the rest of the way. Unlike capsules designed for Low Earth Orbit, Orion is purpose-built for deep space. It features state-of-the-art life support, enhanced radiation protection, and a heat shield capable of withstanding the blistering 1,650 °C temperatures on re-entry into the Earth's atmosphere.
             </p>
           </article>
 
@@ -226,41 +249,57 @@ export default function App() {
               </iframe> 
             </div>
             <div className="p-4 text-center border-t-2 border-black text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-gray-800 bg-gray-50">
-              Interactive 3D Model: The Orion Crew Module and European Service Module
+              Interactive 3D Model of The Orion Crew Module and European Service Module
             </div>
           </section>
-
-          <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
-            <p>
-              With the crew safely aboard Orion, the true test of the mission begins. Navigating the expanse between the Earth and the Moon requires precision burns and a flawless understanding of celestial mechanics.
-            </p>
-          </article>
 
           {/* The Journey Section */}
           <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
             <p>
-              The 10-day odyssey of Artemis II is a complex ballet of orbital mechanics. Unlike the direct Apollo missions, Artemis II will employ a highly elliptical High Earth Orbit (HEO) to test the life support systems before committing to the translunar coast.
+              The 10-day odyssey of Artemis II is a complex ballet of orbital mechanics. Unlike the direct Apollo missions, Artemis II employed a highly elliptical High Earth Orbit (HEO) to test the life support systems before committing to the translunar coast.
             </p>
             <p>
-              Once the massive Trans-Lunar Injection (TLI) burn is executed, Orion will travel on a "free-return trajectory." This means the spacecraft will use the Moon's gravity to slingshot itself back to Earth, requiring no major propulsion to safely return home. The crew will fly 4,600 miles beyond the far side of the Moon, pushing humans further into the solar system than ever before.
+              The massive Trans-Lunar Injection (TLI) burn set Orion on a "free-return trajectory." This means the spacecraft will use the Moon's gravity to slingshot itself back to Earth, requiring no major propulsion to safely return home. The crew will pass within 6,543 km of the lunar surface observing the far side of the Moon and traveling about 406,772 km far from home, pushing humans further into the solar system than ever before.
             </p>
           </article>
 
           {/* Interactive Timeline SVG */}
           <section className="mb-16">
-            <SectionHeader icon={Map} title="Mission Profile: A 10-Day Odyssey" />
+            <SectionHeader icon={Map} title="The Timeline of the 10-Day Odyssey" />
             <TimelineGraphic />
           </section>
 
           {/* Future Section */}
           <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-16">
             <p>
-              Artemis II is merely the prologue. If successful, it sets the stage for Artemis III, which plans to return boots to the lunar surface near the South Pole. It lays the groundwork for the Lunar Gateway, a space station in orbit around the Moon, and a sustained human presence on the lunar surface. 
+              Artemis II is merely the prologue. When astronaut Koch was asked in an interview <i>"What do you hope [the history of the Artemis II mission] says?"</i> she simply answered: <i>"I hope they forget all about Artemis II."</i> As she later added in unanimity with her colleagues, Artemis II is mainly about enabling the next missions that ultimately aim to put a man on Mars.
             </p>
             <p>
-              Ultimately, the lessons learned from the Artemis missions will serve as the stepping stones for humanity's next great leap: a crewed mission to Mars. The hardware is built. The crew is ready. The countdown to a new era of exploration has begun.
+              If the Artemis II mission successfully completes its journey, the next mission, Artemis III will test one or both commercial landers from SpaceX and Blue Origin in 2027, with Artemis IV hoping to return boots to the lunar surface by early 2028. 
+            </p>
+            <p>
+              Ultimately, the lessons learned from the Artemis missions will serve as the stepping stones for humanity's next great leap - a crewed mission to Mars.
             </p>
           </article>
+
+          {/* Artemis Logo Meaning Graphic */}
+          <section className="mb-16 pt-8 border-t-2 border-black">
+            <SectionHeader icon={Info} title="The Artemis Identity" />
+            <div className="bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <img 
+                src="/artemis.jpg" 
+                alt="Artemis Logo Meaning" 
+                className="w-full h-auto border border-gray-200"
+                onError={(e) => {
+                  e.currentTarget.src = '/artemis.png'; // Fallback just in case file was saved as .png
+                  e.currentTarget.onerror = null;
+                }}
+              />
+              <div className="p-4 text-center text-xs sm:text-sm font-sans uppercase tracking-widest text-gray-700 font-bold bg-gray-50 border-t border-gray-200">
+                The symbolism behind the Artemis program identity
+              </div>
+            </div>
+          </section>
 
           {/* Footer */}
           <footer className="border-t-4 border-double border-black pt-6 text-center">
