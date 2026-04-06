@@ -69,7 +69,7 @@ const crewData = [
     bio: 'Wiseman served as flight engineer aboard the ISS for Expedition 41 in 2014, logging 165 days in space. Before his assignment, he served as chief of the Astronaut Office. He is a designated Naval Aviator and former test pilot.',
     initials: 'RW',
     photoUrl: '/wiseman.jpg',
-    link: 'https://www.nasa.gov/astronauts/biographies/g-reid-wiseman',
+    link: 'https://www.nasa.gov/people/reid-wiseman/',
     color: 'text-blue-700 bg-blue-50 border-blue-200'
   },
   {
@@ -79,7 +79,7 @@ const crewData = [
     bio: 'Glover flew as pilot on NASA\'s SpaceX Crew-1 mission in 2020, logging 168 days in space. He participated in four spacewalks and is a former U.S. Navy test pilot with extensive combat experience.',
     initials: 'VG',
     photoUrl: '/glover.jpg',
-    link: 'https://www.nasa.gov/astronauts/biographies/victor-j-glover',
+    link: 'https://www.nasa.gov/people/victor-j-glover-jr/',
     color: 'text-red-700 bg-red-50 border-red-200'
   },
   {
@@ -89,7 +89,7 @@ const crewData = [
     bio: 'Koch holds the record for the longest single spaceflight by a woman (328 days) and participated in the first all-female spacewalk. She has served as a flight engineer on the ISS for three expeditions.',
     initials: 'CK',
     photoUrl: '/koch.jpg',
-    link: 'https://www.nasa.gov/astronauts/biographies/christina-hammock-koch',
+    link: 'https://www.nasa.gov/people/christina-koch/',
     color: 'text-emerald-700 bg-emerald-50 border-emerald-200'
   },
   {
@@ -172,7 +172,7 @@ export default function App() {
             <blockquote className="border-l-8 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 my-10 relative border-y-2 border-r-2">
               <div className="absolute -top-6 -left-4 text-6xl text-gray-300 font-serif leading-none opacity-50">"</div>
               <p className="mb-6 italic text-xl md:text-2xl text-gray-800 font-serif leading-relaxed relative z-10">
-                Bob, this is Gene, and I'm on the surface; and, as I take man's last step from the surface, back home for some time to come—but we believe not too long into the future—I'd like to just (say) what I believe history will record: that America's challenge of today has forged man's destiny of tomorrow. And, as we leave the Moon at Taurus–Littrow, we leave as we came and, God willing, as we shall return, with peace and hope for all mankind. Godspeed the crew of Apollo 17.
+                Bob, this is Gene, and I'm on the surface; and, as I take man's last step from the surface, back home for some time to come - but we believe not too long into the future - I'd like to just (say) what I believe history will record. That America's challenge of today has forged man's destiny of tomorrow. And, as we leave the Moon at Taurus- Littrow, we leave as we came and, God willing, as we shall return, with peace and hope for all mankind. "Godspeed the crew of Apollo 17."
               </p>
               
               <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 border-t-2 border-gray-100 pt-4 not-italic font-sans">
@@ -189,9 +189,12 @@ export default function App() {
                 </div>
               </div>
             </blockquote>
+            <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
+              Source: NASA
+            </div>
 
             <p>
-              Now, the Artemis program aims to close that gap. After several delays, NASA has finally launched humans towards the Moon on April 1st, 2026. As many commentators noted, Artemis II is more than a mission; it is a declaration that the era of deep space exploration has been reborn.
+              Now, the Artemis program aims to close that gap. After several delays, NASA has finally launched humans towards the Moon on April 1st, 2026. As many commentators noted, Artemis II is more than a mission - it is a declaration that the era of deep space exploration has been reborn.
             </p>
           </article>
 
@@ -251,6 +254,9 @@ export default function App() {
             <div className="p-4 text-center border-t-2 border-black text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-gray-800 bg-gray-50">
               Interactive 3D Model of The Orion Crew Module and European Service Module
             </div>
+            <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
+              3D Model Source: MechLab3D
+            </div>
           </section>
 
           {/* The Journey Section */}
@@ -298,6 +304,9 @@ export default function App() {
               <div className="p-4 text-center text-xs sm:text-sm font-sans uppercase tracking-widest text-gray-700 font-bold bg-gray-50 border-t border-gray-200">
                 The symbolism behind the Artemis program identity
               </div>
+            </div>
+            <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
+              Image Source: NASA
             </div>
           </section>
 
