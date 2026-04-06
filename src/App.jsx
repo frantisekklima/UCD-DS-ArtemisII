@@ -12,7 +12,7 @@ const rocketStages = {
   las: { 
     title: 'Launch Abort System', 
     desc: 'Positioned on the very top of the SLS, the LAS is designed to safely pull the Orion crew module away from the rocket in the event of an emergency during launch or ascent.', 
-    stats: { Can Lift: '26 Elephants', Activates In: '< 1 ms' } 
+    stats: { 'Can Lift': '26 Elephants', 'Activates In': '< 1 ms' } 
   },
   orion: { 
     title: 'Orion Spacecraft', 
@@ -32,12 +32,12 @@ const rocketStages = {
   core: { 
     title: 'SLS Core Stage', 
     desc: 'The backbone of the rocket, standing 212 feet tall. It houses 730,000 gallons of super-cooled liquid hydrogen and liquid oxygen to feed the four RS-25 engines at its base.', 
-    stats: { Height: '64,6 m', Empty Weight: '85,275 kg' } 
+    stats: { Height: '64,6 m', 'Empty Weight': '85,275 kg' } 
   },
   engines: {
     title: 'RS-25 Engines',
     desc: 'Four RS-25 engines power the core stage. Originally developed for the Space Shuttle program, these highly efficient engines use cryogenic liquid hydrogen and oxygen to produce over 2 million pounds of combined thrust.',
-    stats: { Thrust: '9,100,000 Newtons total', Operation Time: '8 minutes' }
+    stats: { Thrust: '9,100,000 Newtons total', 'Operation Time': '8 minutes' }
   },
   srb: { 
     title: 'Solid Rocket Boosters', 
