@@ -139,7 +139,7 @@ export default function App() {
             </h1>
             <div className="flex justify-between items-center text-xs md:text-sm font-sans uppercase tracking-widest border-t border-black pt-2 font-bold text-gray-700">
               <span>Special Interactive Edition</span>
-              <span>{currentDate}</span>
+              <span>Saturday, March 4, 2026</span>
               <span>Science & Technology</span>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function App() {
               In December 1972, Apollo 17 Commander Eugene Cernan left the final human footprints in the lunar dust. As he departed, he spoke of a promise to return. For over half a century, that promise remained unfulfilled, as humanity's gaze shifted to low-Earth orbit, the Space Shuttle, and the construction of the International Space Station. 
             </p>
             
-            <blockquote className="border-l-8 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 my-10 relative border-y-2 border-r-2">
+            <blockquote className="border-l-8 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 mt-10 relative border-y-2 border-r-2">
               <div className="absolute -top-6 -left-4 text-6xl text-gray-300 font-serif leading-none opacity-50">"</div>
               <p className="mb-6 italic text-xl md:text-2xl text-gray-800 font-serif leading-relaxed relative z-10">
                 Bob, this is Gene, and I'm on the surface; and, as I take man's last step from the surface, back home for some time to come - but we believe not too long into the future - I'd like to just (say) what I believe history will record. That America's challenge of today has forged man's destiny of tomorrow. And, as we leave the Moon at Taurus- Littrow, we leave as we came and, God willing, as we shall return, with peace and hope for all mankind. "Godspeed the crew of Apollo 17."
@@ -190,10 +190,10 @@ export default function App() {
               </div>
             </blockquote>
             <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
-              Source: NASA
+              Source: apollojournals.org
             </div>
 
-            <p>
+            <p className="mt-10">
               Now, the Artemis program aims to close that gap. After several delays, NASA has finally launched humans towards the Moon on April 1st, 2026. As many commentators noted, Artemis II is more than a mission - it is a declaration that the era of deep space exploration has been reborn.
             </p>
           </article>
@@ -254,10 +254,10 @@ export default function App() {
             <div className="p-4 text-center border-t-2 border-black text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-gray-800 bg-gray-50">
               Interactive 3D Model of The Orion Crew Module and European Service Module
             </div>
-            <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
-              3D Model Source: MechLab3D
-            </div>
           </section>
+          <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
+              3D Model Source: MechLab3D
+          </div>
 
           {/* The Journey Section */}
           <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
