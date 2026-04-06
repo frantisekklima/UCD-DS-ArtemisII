@@ -7,42 +7,42 @@ const rocketStages = {
   sls: {
     title: 'Space Launch System (SLS)',
     desc: 'The Space Launch System is a super heavy-lift expendable launch vehicle, providing the foundation for human exploration beyond Earth\'s orbit. With its unprecedented power and capabilities, SLS is the only rocket that can send Orion, astronauts, and cargo to the Moon on a single mission.',
-    stats: { Thrust: '8.8M lbs', Payload: '95,000 lbs to LEO' }
+    stats: { Thrust: '39,000,000 Newtons', Payload: '95,000 kg to Low Eearth Orbit' }
   },
   las: { 
     title: 'Launch Abort System', 
     desc: 'Positioned on the very top of the SLS, the LAS is designed to safely pull the Orion crew module away from the rocket in the event of an emergency during launch or ascent.', 
-    stats: { Height: '44 ft', Motor: 'Solid Propellant' } 
+    stats: { Can Lift: '26 Elephants', Activates In: '< 1 ms' } 
   },
   orion: { 
     title: 'Orion Spacecraft', 
     desc: 'The exploration vehicle that will carry the four-person crew to space, provide emergency abort capability, sustain the crew during space travel, and ensure safe re-entry.', 
-    stats: { Volume: '316 cubic ft', Passengers: '4 Astronauts' } 
+    stats: { Volume: '8,9 m sq', Passengers: '4 Astronauts' } 
   },
   icps: { 
     title: 'Interim Cryogenic Propulsion Stage', 
     desc: 'The upper stage powered by one RL10 engine. It will perform the critical Trans-Lunar Injection (TLI) burn, accelerating Orion out of Earth orbit towards the Moon.', 
-    stats: { Thrust: '24,750 lbs', Fuel: 'Liquid H2 / O2' } 
+    stats: { Thrust: '110,000 Newtons', Fuel: 'Liquid H2 / O2' } 
   },
   lvsa: {
     title: 'Launch Vehicle Stage Adapter',
     desc: 'The cone-shaped Launch Vehicle Stage Adapter (LVSA) connects the massive Core Stage to the upper stages. It also partially encloses and protects the engine of the Interim Cryogenic Propulsion Stage (ICPS) during launch.',
-    stats: { Height: '27.5 ft', Diameter: '27.5 ft to 16.7 ft' }
+    stats: { Height: '8,4 m', Diameter: '5m to 8,4 m' }
   },
   core: { 
     title: 'SLS Core Stage', 
     desc: 'The backbone of the rocket, standing 212 feet tall. It houses 730,000 gallons of super-cooled liquid hydrogen and liquid oxygen to feed the four RS-25 engines at its base.', 
-    stats: { Height: '212 ft', Weight: '2.1M lbs' } 
+    stats: { Height: '64,6 m', Empty Weight: '85,275 kg' } 
   },
   engines: {
     title: 'RS-25 Engines',
     desc: 'Four RS-25 engines power the core stage. Originally developed for the Space Shuttle program, these highly efficient engines use cryogenic liquid hydrogen and oxygen to produce over 2 million pounds of combined thrust.',
-    stats: { Thrust: '2M lbs total', Fuel: 'Cryogenic' }
+    stats: { Thrust: '9,100,000 Newtons total', Operation Time: '8 minutes' }
   },
   srb: { 
     title: 'Solid Rocket Boosters', 
     desc: 'Two twin five-segment solid rocket boosters provide more than 75% of the total thrust at liftoff. They burn for just over two minutes before separating from the core stage.', 
-    stats: { Thrust: '3.6M lbs each', BurnTime: '126 seconds' } 
+    stats: { Thrust: '16,000,000 Newtons each', BurnTime: '126 seconds' } 
   }
 };
 
@@ -76,7 +76,7 @@ const crewData = [
     name: 'Victor Glover',
     role: 'Pilot',
     agency: 'NASA',
-    bio: 'Glover flew as pilot on NASA\'s SpaceX Crew-1 mission in 2020, logging 168 days in space. He participated in four spacewalks and is a former U.S. Navy test pilot with extensive combat experience.',
+    bio: 'Glover flew as pilot on SpaceX\'s Crew-1 mission in 2020, logging 168 days in space. He participated in four spacewalks and is a former U.S. Navy test pilot with extensive combat experience.',
     initials: 'VG',
     photoUrl: '/glover.jpg',
     link: 'https://www.nasa.gov/people/victor-j-glover-jr/',
@@ -96,7 +96,7 @@ const crewData = [
     name: 'Jeremy Hansen',
     role: 'Mission Specialist',
     agency: 'CSA',
-    bio: 'Representing the Canadian Space Agency, Hansen is making his first flight to space. He is a former Royal Canadian Air Force fighter pilot and has served in numerous leadership roles within the astronaut corps.',
+    bio: 'Representing the Canadian Space Agency, Hansen will be the first Canadian to venture to the Moon. He previously took part in NASA\'s NEEMO 19 undersea exploration mission and ESA\'s CAVES program during which he lives underground for six days.',
     initials: 'JH',
     photoUrl: '/hansen.jpg',
     link: 'https://www.asc-csa.gc.ca/eng/astronauts/canadian/active/bio-jeremy-hansen.asp',
@@ -239,7 +239,7 @@ export default function App() {
           </article>
 
           {/* Interactive 3D Model: Orion */}
-          <section className="mb-16 bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <section className="bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <div className="sketchfab-embed-wrapper w-full aspect-video bg-[#111]">
               <iframe 
                 title="NASA Orion Spacecraft" 
@@ -260,10 +260,11 @@ export default function App() {
           </div>
 
           {/* The Journey Section */}
-          <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
+          <article className="mt-10 prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
             <p>
               The 10-day odyssey of Artemis II is a complex ballet of orbital mechanics. Unlike the direct Apollo missions, Artemis II employed a highly elliptical High Earth Orbit (HEO) to test the life support systems before committing to the translunar coast.
             </p>
+            <br></br>
             <p>
               The massive Trans-Lunar Injection (TLI) burn set Orion on a "free-return trajectory." This means the spacecraft will use the Moon's gravity to slingshot itself back to Earth, requiring no major propulsion to safely return home. The crew will pass within 6,543 km of the lunar surface observing the far side of the Moon and traveling about 406,772 km far from home, pushing humans further into the solar system than ever before.
             </p>
@@ -280,9 +281,11 @@ export default function App() {
             <p>
               Artemis II is merely the prologue. When astronaut Koch was asked in an interview <i>"What do you hope [the history of the Artemis II mission] says?"</i> she simply answered: <i>"I hope they forget all about Artemis II."</i> As she later added in unanimity with her colleagues, Artemis II is mainly about enabling the next missions that ultimately aim to put a man on Mars.
             </p>
+            <br></br>
             <p>
               If the Artemis II mission successfully completes its journey, the next mission, Artemis III will test one or both commercial landers from SpaceX and Blue Origin in 2027, with Artemis IV hoping to return boots to the lunar surface by early 2028. 
             </p>
+            <br></br>
             <p>
               Ultimately, the lessons learned from the Artemis missions will serve as the stepping stones for humanity's next great leap - a crewed mission to Mars.
             </p>
