@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { Info, Map, Rocket, UserSquare2, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { Info, Map, Rocket, UserSquare2, ChevronDown, ChevronUp, ExternalLink, Music, X } from 'lucide-react';
 
 // --- DATA ---
 
@@ -7,7 +7,7 @@ const rocketStages = {
   sls: {
     title: 'Space Launch System (SLS)',
     desc: 'The Space Launch System is a super heavy-lift expendable launch vehicle, providing the foundation for human exploration beyond Earth\'s orbit. With its unprecedented power and capabilities, SLS is the only rocket that can send Orion, astronauts, and cargo to the Moon on a single mission.',
-    stats: { Thrust: '39,000,000 Newtons', Payload: '95,000 kg to Low Eearth Orbit' }
+    stats: { Thrust: '39,000,000 Newtons', Payload: '95,000 kg to Low Earth Orbit' }
   },
   las: { 
     title: 'Launch Abort System', 
@@ -17,7 +17,7 @@ const rocketStages = {
   orion: { 
     title: 'Orion Spacecraft', 
     desc: 'The exploration vehicle that carries the four-person crew to space, provides emergency abort capability, sustains the crew during space travel, and ensures safe re-entry.', 
-    stats: { Volume: '8,9 m sq', Passengers: '4 Astronauts' } 
+    stats: { Volume: '8.9 m²', Passengers: '4 Astronauts' } 
   },
   icps: { 
     title: 'Interim Cryogenic Propulsion Stage', 
@@ -27,12 +27,12 @@ const rocketStages = {
   lvsa: {
     title: 'Launch Vehicle Stage Adapter',
     desc: 'The cone-shaped Launch Vehicle Stage Adapter (LVSA) connects the massive Core Stage to the upper stages. It also partially encloses and protects the engine of the Interim Cryogenic Propulsion Stage (ICPS) during launch.',
-    stats: { Height: '8,4 m', Diameter: '5m to 8,4 m' }
+    stats: { Height: '8.4 m', Diameter: '5m to 8.4 m' }
   },
   core: { 
     title: 'SLS Core Stage', 
-    desc: 'The backbone of the rocket, standing 64,6 meters tall. Visually similar to the core stage of the Space Shuttle program it provides about 25% of the total thrust of the vehicle.', 
-    stats: { Height: '64,6 m', 'Empty Weight': '85,275 kg' } 
+    desc: 'The backbone of the rocket, standing 64.6 meters tall. Visually similar to the core stage of the Space Shuttle program, it provides about 25% of the total thrust of the vehicle.', 
+    stats: { Height: '64.6 m', 'Empty Weight': '85,275 kg' } 
   },
   engines: {
     title: 'RS-25 Engines',
@@ -51,9 +51,9 @@ const timelineSteps = [
   { title: "Main Engine Cutoff", time: "Day 1", desc: "The core stage main engines shut down and separate, placing Orion and the ICPS into an initial Low Earth Orbit (LEO)." },
   { title: "Perigee Raise", time: "Day 1", desc: "A short burn from the ICPS second stage stabilizes the astronauts' orbit and prepares for altitude increases." },
   { title: "Apogee Raise Burn", time: "Day 1", desc: "A second ICPS burn raises the astronauts into a High Earth Orbit (HEO) to test the spacecraft's systems." },
-  { title: "Second Stage Separation", time: "Day 1", desc: "Once the ICPS has done its job, it separates from Orion and is repurposed as a target for a verifying the crew can safely pilot Orion in manual mode." },
-  { title: "Trans-Lunar Injection", time: "Day 2", desc: "Orion’s Main Engine performs the last major engine firing of the mission accelerating Orion out of Earth's gravity and starting its free-return trajectory to the Moon." },
-  { title: "Outbound Transit", time: "Days 2-5", desc: "Orion crew performs small trajectory correction burns and coasts through deep space for a four-day journey toward the Moon." },
+  { title: "Second Stage Separation", time: "Day 1", desc: "Once the ICPS has done its job, it separates from Orion and is repurposed as a target for verifying the crew can safely pilot Orion in manual mode." },
+  { title: "Trans-Lunar Injection", time: "Day 2", desc: "Orion’s Main Engine performs the last major engine firing of the mission, accelerating Orion out of Earth's gravity and starting its free-return trajectory to the Moon." },
+  { title: "Outbound Transit", time: "Days 2-5", desc: "The Orion crew performs small trajectory correction burns and coasts through deep space for a four-day journey toward the Moon." },
   { title: "Lunar Flyby", time: "Day 5", desc: "Orion slingshots around the far side of the Moon, passing within 7,000 km of the surface, while also venturing farther than humans have ever gone before." },
   { title: "Trans-Earth Return", time: "Days 6-9", desc: "Using the Moon's gravity assist, Orion coasts on a four-day return journey back toward Earth." },
   { title: "Module Separation", time: "Day 10", desc: "The astronauts' return module separates from the European Service Module housing the last remaining engines, preparing for atmospheric entry." },
@@ -108,6 +108,31 @@ const crewData = [
 
 export default function App() {
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  
+  // Easter Egg State
+  const [showEasterEgg, setShowEasterEgg] = useState(false);
+  const keySequence = useRef('');
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Ignore functional keys
+      if (e.key.length !== 1) return;
+      
+      keySequence.current += e.key.toLowerCase();
+      
+      // Keep only the last 15 characters (length of "amazeamazeamaze")
+      if (keySequence.current.length > 15) {
+        keySequence.current = keySequence.current.slice(-15);
+      }
+      
+      if (keySequence.current === 'amazeamazeamaze') {
+        setShowEasterEgg(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#f9f9f9] text-black font-serif selection:bg-gray-300 relative overflow-x-hidden">
@@ -172,7 +197,7 @@ export default function App() {
             <blockquote className="border-l-8 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 mt-10 relative border-y-2 border-r-2">
               <div className="absolute -top-6 -left-4 text-6xl text-gray-300 font-serif leading-none opacity-50">"</div>
               <p className="mb-6 italic text-xl md:text-2xl text-gray-800 font-serif leading-relaxed relative z-10">
-                Bob, this is Gene, and I'm on the surface; and, as I take man's last step from the surface, back home for some time to come - but we believe not too long into the future - I'd like to just (say) what I believe history will record. That America's challenge of today has forged man's destiny of tomorrow. And, as we leave the Moon at Taurus- Littrow, we leave as we came and, God willing, as we shall return, with peace and hope for all mankind. "Godspeed the crew of Apollo 17."
+                Bob, this is Gene, and I'm on the surface; and, as I take man's last step from the surface, back home for some time to come - but we believe not too long into the future - I'd like to just (say) what I believe history will record. That America's challenge of today has forged man's destiny of tomorrow. And, as we leave the Moon at Taurus-Littrow, we leave as we came and, God willing, as we shall return, with peace and hope for all mankind. "Godspeed the crew of Apollo 17."
               </p>
               
               <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 border-t-2 border-gray-100 pt-4 not-italic font-sans">
@@ -325,6 +350,40 @@ export default function App() {
 
         </main>
       </div>
+
+      {/* Secret Easter Egg Audio Player */}
+      <div 
+        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-x-4 border-t-4 border-black p-4 shadow-[8px_-8px_0px_0px_rgba(0,0,0,1)] transition-transform duration-700 z-50 ${showEasterEgg ? 'translate-y-0' : 'translate-y-[120%]'}`}
+      >
+        <div className="flex justify-between items-center mb-4 border-b-2 border-black pb-2">
+          <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-widest text-black">
+            <Music className="w-4 h-4" /> Secret Unlocked
+          </div>
+          <button 
+            onClick={() => setShowEasterEgg(false)} 
+            className="text-gray-500 hover:text-black transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-black text-white flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] animate-pulse">
+             <Music className="w-6 h-6" />
+          </div>
+          <div className="flex-1 overflow-hidden">
+            <div className="font-bold text-sm font-sans uppercase truncate text-black">Sign of the Times</div>
+            <div className="text-xs text-gray-600 font-bold uppercase tracking-wider">Harry Styles</div>
+          </div>
+          {showEasterEgg && (
+            <audio autoPlay controls className="h-8 w-[140px] outline-none">
+              <source src="/signofthetimes.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          )}
+        </div>
+      </div>
+
     </div>
   );
 }
