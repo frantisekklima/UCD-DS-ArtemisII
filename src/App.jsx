@@ -16,12 +16,12 @@ const rocketStages = {
   },
   orion: { 
     title: 'Orion Spacecraft', 
-    desc: 'The exploration vehicle that will carry the four-person crew to space, provide emergency abort capability, sustain the crew during space travel, and ensure safe re-entry.', 
+    desc: 'The exploration vehicle that carries the four-person crew to space, provides emergency abort capability, sustains the crew during space travel, and ensures safe re-entry.', 
     stats: { Volume: '8,9 m sq', Passengers: '4 Astronauts' } 
   },
   icps: { 
     title: 'Interim Cryogenic Propulsion Stage', 
-    desc: 'The upper stage powered by one RL10 engine. It will perform the critical Trans-Lunar Injection (TLI) burn, accelerating Orion out of Earth orbit towards the Moon.', 
+    desc: 'The upper stage powered by one RL10 engine. It performed the critical Trans-Lunar Injection (TLI) burn, accelerating Orion out of Earth\'s orbit towards the Moon.', 
     stats: { Thrust: '110,000 Newtons', Fuel: 'Liquid H2 / O2' } 
   },
   lvsa: {
@@ -31,12 +31,12 @@ const rocketStages = {
   },
   core: { 
     title: 'SLS Core Stage', 
-    desc: 'The backbone of the rocket, standing 212 feet tall. It houses 730,000 gallons of super-cooled liquid hydrogen and liquid oxygen to feed the four RS-25 engines at its base.', 
+    desc: 'The backbone of the rocket, standing 64,6 meters tall. Visually similar to the core stage of the Space Shuttle program it provides about 25% of the total thrust of the vehicle.', 
     stats: { Height: '64,6 m', 'Empty Weight': '85,275 kg' } 
   },
   engines: {
     title: 'RS-25 Engines',
-    desc: 'Four RS-25 engines power the core stage. Originally developed for the Space Shuttle program, these highly efficient engines use cryogenic liquid hydrogen and oxygen to produce over 2 million pounds of combined thrust.',
+    desc: 'Four RS-25 engines power the core stage. Originally developed for the Space Shuttle program, these highly efficient engines use cryogenic liquid hydrogen and oxygen to produce over 9,000,000 Newtons of combined thrust.',
     stats: { Thrust: '9,100,000 Newtons total', 'Operation Time': '8 minutes' }
   },
   srb: { 
@@ -50,14 +50,14 @@ const timelineSteps = [
   { title: "Liftoff & Ascent", time: "Day 1", desc: "The Space Launch System lifts off from Pad 39B at Kennedy Space Center, utilizing the SRBs and core stage." },
   { title: "Main Engine Cutoff", time: "Day 1", desc: "The core stage main engines shut down and separate, placing Orion and the ICPS into an initial Low Earth Orbit (LEO)." },
   { title: "Perigee Raise", time: "Day 1", desc: "A short burn from the ICPS second stage stabilizes the astronauts' orbit and prepares for altitude increases." },
-  { title: "Apogee Raise Burn", time: "Day 1", desc: "A second burn raises the astronauts into a High Earth Orbit (HEO) to test the spacecraft's systems." },
-  { title: "HEO Checkout", time: "Day 1", desc: "During a 23.5-hour highly elliptical orbit, the crew tests manual control, life support, and habitation equipment." },
-  { title: "Trans-Lunar Injection", time: "Day 2", desc: "The massive final burn of the ICPS accelerates Orion out of Earth's gravity and starts its free-return trajectory to the Moon." },
-  { title: "Outbound Transit", time: "Days 2-4", desc: "Orion separates from the ICPS and coasts through deep space for a four-day journey toward the Moon." },
-  { title: "Lunar Flyby", time: "Day 5", desc: "Orion slingshots around the far side of the Moon, passing within 4,600 miles of the surface, farther than humans have gone before." },
+  { title: "Apogee Raise Burn", time: "Day 1", desc: "A second ICPS burn raises the astronauts into a High Earth Orbit (HEO) to test the spacecraft's systems." },
+  { title: "Second Stage Separation", time: "Day 1", desc: "Once the ICPS has done its job, it separates from Orion and is repurposed as a target for a verifying the crew can safely pilot Orion in manual mode." },
+  { title: "Trans-Lunar Injection", time: "Day 2", desc: "Orion’s Main Engine performs the last major engine firing of the mission accelerating Orion out of Earth's gravity and starting its free-return trajectory to the Moon." },
+  { title: "Outbound Transit", time: "Days 2-5", desc: "Orion crew performs small trajectory correction burns and coasts through deep space for a four-day journey toward the Moon." },
+  { title: "Lunar Flyby", time: "Day 5", desc: "Orion slingshots around the far side of the Moon, passing within 7,000 km of the surface, while also venturing farther than humans have ever gone before." },
   { title: "Trans-Earth Return", time: "Days 6-9", desc: "Using the Moon's gravity assist, Orion coasts on a four-day return journey back toward Earth." },
-  { title: "Module Separation", time: "Day 10", desc: "The astronauts' return module separates from the European Service Module, preparing for atmospheric entry." },
-  { title: "Earth Re-entry", time: "Day 10", desc: "The capsule re-enters Earth's atmosphere at a record speed of nearly 25,000 mph, enduring temperatures up to 5,000°F." },
+  { title: "Module Separation", time: "Day 10", desc: "The astronauts' return module separates from the European Service Module housing the last remaining engines, preparing for atmospheric entry." },
+  { title: "Earth Re-entry", time: "Day 10", desc: "The capsule re-enters Earth's atmosphere at a record speed of roughly 400,000 km/h, enduring temperatures up to 1,650°C." },
   { title: "Splashdown", time: "Day 10", desc: "Astronauts land safely in the Pacific Ocean under parachutes, concluding the historic Artemis II mission." }
 ];
 
@@ -96,7 +96,7 @@ const crewData = [
     name: 'Jeremy Hansen',
     role: 'Mission Specialist',
     agency: 'CSA',
-    bio: 'Representing the Canadian Space Agency, Hansen will be the first Canadian to venture to the Moon. He previously took part in NASA\'s NEEMO 19 undersea exploration mission and ESA\'s CAVES program during which he lives underground for six days.',
+    bio: 'Representing the Canadian Space Agency, Hansen will be the first Canadian to venture to the Moon. He previously took part in NASA\'s NEEMO 19 undersea exploration mission and ESA\'s CAVES program during which he lived underground for six days.',
     initials: 'JH',
     photoUrl: '/hansen.jpg',
     link: 'https://www.asc-csa.gc.ca/eng/astronauts/canadian/active/bio-jeremy-hansen.asp',
