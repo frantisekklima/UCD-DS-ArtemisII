@@ -9,40 +9,40 @@ const rocketStages = {
     desc: 'The Space Launch System is a super heavy-lift expendable launch vehicle, providing the foundation for human exploration beyond Earth\'s orbit. With its unprecedented power and capabilities, SLS is the only rocket that can send Orion, astronauts, and cargo to the Moon on a single mission.',
     stats: { Thrust: '39,000,000 Newtons', Payload: '95,000 kg to Low Earth Orbit' }
   },
-  las: { 
-    title: 'Launch Abort System', 
-    desc: 'Positioned on the very top of the SLS, the LAS is designed to safely pull the Orion crew module away from the rocket in the event of an emergency during launch or ascent.', 
-    stats: { 'Can Lift': '26 Elephants', 'Activates In': '< 1 ms' } 
+  las: {
+    title: 'Launch Abort System',
+    desc: 'Positioned on the very top of the SLS, the LAS is designed to safely pull the Orion crew module away from the rocket in the event of an emergency during launch or ascent.',
+    stats: { 'Can Lift': '26 Elephants', 'Activates In': '< 1 ms' }
   },
-  orion: { 
-    title: 'Orion Spacecraft', 
-    desc: 'The exploration vehicle that carries the four-person crew to space, provides emergency abort capability, sustains the crew during space travel, and ensures safe re-entry.', 
-    stats: { Volume: '8.9 m²', Passengers: '4 Astronauts' } 
+  orion: {
+    title: 'Orion Spacecraft',
+    desc: 'The exploration vehicle that carries the four-person crew to space, provides emergency abort capability, sustains the crew during space travel, and ensures safe re-entry.',
+    stats: { Volume: '8.9 m²', Passengers: '4 Astronauts' }
   },
-  icps: { 
-    title: 'Interim Cryogenic Propulsion Stage', 
-    desc: 'The upper stage powered by one RL10 engine. It performed the critical Trans-Lunar Injection (TLI) burn, accelerating Orion out of Earth\'s orbit towards the Moon.', 
-    stats: { Thrust: '110,000 Newtons', Fuel: 'Liquid H2 / O2' } 
+  icps: {
+    title: 'Interim Cryogenic Propulsion Stage',
+    desc: 'The upper stage powered by one RL10 engine. It performed the critical Trans-Lunar Injection (TLI) burn, accelerating Orion out of Earth\'s orbit towards the Moon.',
+    stats: { Thrust: '110,000 Newtons', Fuel: 'Liquid H2 / O2' }
   },
   lvsa: {
     title: 'Launch Vehicle Stage Adapter',
     desc: 'The cone-shaped Launch Vehicle Stage Adapter (LVSA) connects the massive Core Stage to the upper stages. It also partially encloses and protects the engine of the Interim Cryogenic Propulsion Stage (ICPS) during launch.',
     stats: { Height: '8.4 m', Diameter: '5m to 8.4 m' }
   },
-  core: { 
-    title: 'SLS Core Stage', 
-    desc: 'The backbone of the rocket, standing 64.6 meters tall. Visually similar to the core stage of the Space Shuttle program, it provides about 25% of the total thrust of the vehicle.', 
-    stats: { Height: '64.6 m', 'Empty Weight': '85,275 kg' } 
+  core: {
+    title: 'SLS Core Stage',
+    desc: 'The backbone of the rocket, standing 64.6 meters tall. Visually similar to the core stage of the Space Shuttle program, it provides about 25% of the total thrust of the vehicle.',
+    stats: { Height: '64.6 m', 'Empty Weight': '85,275 kg' }
   },
   engines: {
     title: 'RS-25 Engines',
     desc: 'Four RS-25 engines power the core stage. Originally developed for the Space Shuttle program, these highly efficient engines use cryogenic liquid hydrogen and oxygen to produce over 9,000,000 Newtons of combined thrust.',
     stats: { Thrust: '9,100,000 Newtons total', 'Operation Time': '8 minutes' }
   },
-  srb: { 
-    title: 'Solid Rocket Boosters', 
-    desc: 'Two twin five-segment solid rocket boosters provide more than 75% of the total thrust at liftoff. They burn for just over two minutes before separating from the core stage.', 
-    stats: { Thrust: '16,000,000 Newtons each', BurnTime: '126 seconds' } 
+  srb: {
+    title: 'Solid Rocket Boosters',
+    desc: 'Two twin five-segment solid rocket boosters provide more than 75% of the total thrust at liftoff. They burn for just over two minutes before separating from the core stage.',
+    stats: { Thrust: '16,000,000 Newtons each', BurnTime: '126 seconds' }
   }
 };
 
@@ -108,7 +108,7 @@ const crewData = [
 
 export default function App() {
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  
+
   // Easter Egg State
   const [showEasterEgg, setShowEasterEgg] = useState(false);
   const keySequence = useRef('');
@@ -117,14 +117,14 @@ export default function App() {
     const handleKeyDown = (e) => {
       // Ignore functional keys
       if (e.key.length !== 1) return;
-      
+
       keySequence.current += e.key.toLowerCase();
-      
+
       // Keep only the last 15 characters (length of "amazeamazeamaze")
       if (keySequence.current.length > 15) {
         keySequence.current = keySequence.current.slice(-15);
       }
-      
+
       if (keySequence.current === 'amazeamazeamaze') {
         setShowEasterEgg(true);
       }
@@ -136,7 +136,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f9f9f9] text-black font-serif selection:bg-gray-300 relative overflow-x-hidden">
-      
+
       {/* Background Image Fading into the Page (Absolute positioning keeps it stuck to top and scrolls away) */}
       <div className="absolute top-0 right-0 w-full sm:w-[80vw] md:w-[55vw] lg:w-[45vw] h-[50vh] md:h-[70vh] z-0 pointer-events-none">
         <div className="absolute inset-0 bg-no-repeat bg-cover bg-right-top opacity-40 mix-blend-multiply" style={{ backgroundImage: "url('/backgroundrocket.jpg')" }}></div>
@@ -146,7 +146,8 @@ export default function App() {
 
       <div className="relative z-10">
         {/* CSS Injection for hide-scrollbar */}
-        <style dangerouslySetInnerHTML={{__html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           .hide-scrollbar::-webkit-scrollbar { display: none; }
           .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
           .custom-scrollbar::-webkit-scrollbar { height: 8px; }
@@ -172,7 +173,7 @@ export default function App() {
 
         {/* Article Body */}
         <main className="max-w-4xl mx-auto px-4 pb-20">
-          
+
           {/* Headline Section */}
           <div className="mb-12 text-center mt-8">
             <h2 className="text-4xl md:text-6xl font-extrabold leading-none mb-6">
@@ -191,26 +192,26 @@ export default function App() {
           {/* Introduction & History */}
           <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-16">
             <p className="drop-cap">
-              In December 1972, Apollo 17 Commander Eugene Cernan left the final human footprints in the lunar dust. As he departed, he spoke of a promise to return. For over half a century, that promise remained unfulfilled, as humanity's gaze shifted to low-Earth orbit, the Space Shuttle, and the construction of the International Space Station. 
+              In December 1972, Apollo 17 Commander Eugene Cernan left the final human footprints in the lunar dust. As he departed, he spoke of a promise to return. For over half a century, that promise remained unfulfilled, as humanity's gaze shifted to low-Earth orbit, the Space Shuttle, and the construction of the International Space Station.
             </p>
-            
+
             <blockquote className="border-l-8 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 mt-10 relative border-y-2 border-r-2">
               <div className="absolute -top-6 -left-4 text-6xl text-gray-300 font-serif leading-none opacity-50">"</div>
               <p className="mb-6 italic text-xl md:text-2xl text-gray-800 font-serif leading-relaxed relative z-10">
                 Bob, this is Gene, and I'm on the surface; and, as I take man's last step from the surface, back home for some time to come - but we believe not too long into the future - I'd like to just (say) what I believe history will record. That America's challenge of today has forged man's destiny of tomorrow. And, as we leave the Moon at Taurus-Littrow, we leave as we came and, God willing, as we shall return, with peace and hope for all mankind. "Godspeed the crew of Apollo 17."
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 border-t-2 border-gray-100 pt-4 not-italic font-sans">
                 <div className="flex flex-col">
                   <span className="font-bold text-sm uppercase tracking-wider text-black">Commander Eugene Cernan</span>
                   <span className="text-xs text-gray-500 uppercase font-bold tracking-widest">Apollo 17, Dec 14, 1972</span>
                 </div>
                 <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
-                   <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400">Listen to Historic Broadcast</span>
-                   <audio controls className="w-full sm:w-64 h-8 outline-none">
-                     <source src="/cernan.mp3" type="audio/mpeg" />
-                     Your browser does not support the audio element.
-                   </audio>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400">Listen to Historic Broadcast</span>
+                  <audio controls className="w-full sm:w-64 h-8 outline-none">
+                    <source src="/cernan.mp3" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
                 </div>
               </div>
             </blockquote>
@@ -225,7 +226,7 @@ export default function App() {
 
           {/* The Crew Section */}
           <section className="mb-16">
-            <SectionHeader icon={UserSquare2} title="The Vanguard: Meet the Crew" />
+            <SectionHeader icon={UserSquare2} title="Meet the Crew" />
             <p className="font-serif text-lg mb-8 text-gray-800">
               The Artemis II mission is crewed by four exceptional individuals representing a new, diverse generation of explorers. Their selection marks the first time a woman, a person of color, and a Canadian will fly to the lunar vicinity.
             </p>
@@ -259,29 +260,29 @@ export default function App() {
           {/* The Orion Spacecraft Section */}
           <article className="prose prose-lg md:prose-xl max-w-none text-gray-900 leading-relaxed text-justify mb-10">
             <p>
-              Once the towering SLS has completed its job of breaking Earth's gravitational grip, the Orion spacecraft will separate and carry the crew the rest of the way. Unlike capsules designed for Low Earth Orbit, Orion is purpose-built for deep space. It features state-of-the-art life support, enhanced radiation protection, and a heat shield capable of withstanding the blistering 1,650 °C temperatures on re-entry into the Earth's atmosphere.
+              Once the towering SLS completes its job of breaking Earth's gravitational grip, the Orion spacecraft separates and carries the crew the rest of the way. Unlike capsules designed for Low Earth Orbit, Orion is purpose-built for deep space. It features state-of-the-art life support, enhanced radiation protection, and a heat shield capable of withstanding the blistering 1,650 °C temperatures on re-entry into the Earth's atmosphere.
             </p>
           </article>
 
           {/* Interactive 3D Model: Orion */}
           <section className="bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <div className="sketchfab-embed-wrapper w-full aspect-video bg-[#111]">
-              <iframe 
-                title="NASA Orion Spacecraft" 
-                frameBorder="0" 
-                allowFullScreen 
-                allow="autoplay; fullscreen; xr-spatial-tracking" 
+              <iframe
+                title="NASA Orion Spacecraft"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; fullscreen; xr-spatial-tracking"
                 src="https://sketchfab.com/models/1b783d2e242b4021a9ccdce44a051dc3/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=2&dnt=1"
                 className="w-full h-full"
-              > 
-              </iframe> 
+              >
+              </iframe>
             </div>
             <div className="p-4 text-center border-t-2 border-black text-xs md:text-sm font-sans font-bold uppercase tracking-widest text-gray-800 bg-gray-50">
               Interactive 3D Model of The Orion Crew Module and European Service Module
             </div>
           </section>
           <div className="mt-4 text-right text-[10px] sm:text-xs font-sans text-gray-500 uppercase tracking-wider font-bold">
-              3D Model Source: MechLab3D
+            3D Model Source: MechLab3D
           </div>
 
           {/* The Journey Section */}
@@ -308,7 +309,7 @@ export default function App() {
             </p>
             <br></br>
             <p>
-              If the Artemis II mission successfully completes its journey, the next mission, Artemis III will test one or both commercial landers from SpaceX and Blue Origin in 2027, with Artemis IV hoping to return boots to the lunar surface by early 2028. 
+              If the Artemis II mission successfully completes its journey, the next mission, Artemis III, will test one or both commercial landers from SpaceX and Blue Origin in 2027, with Artemis IV hoping to return boots to the lunar surface by early 2028.
             </p>
             <br></br>
             <p>
@@ -320,9 +321,9 @@ export default function App() {
           <section className="mb-16 pt-8 border-t-2 border-black">
             <SectionHeader icon={Info} title="The Artemis Identity" />
             <div className="bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-              <img 
-                src="/artemis.jpg" 
-                alt="Artemis Logo Meaning" 
+              <img
+                src="/artemis.jpg"
+                alt="Artemis Logo Meaning"
                 className="w-full h-auto border border-gray-200"
                 onError={(e) => {
                   e.currentTarget.src = '/artemis.png'; // Fallback just in case file was saved as .png
@@ -352,24 +353,24 @@ export default function App() {
       </div>
 
       {/* Secret Easter Egg Audio Player */}
-      <div 
+      <div
         className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-x-4 border-t-4 border-black p-4 shadow-[8px_-8px_0px_0px_rgba(0,0,0,1)] transition-transform duration-700 z-50 ${showEasterEgg ? 'translate-y-0' : 'translate-y-[120%]'}`}
       >
         <div className="flex justify-between items-center mb-4 border-b-2 border-black pb-2">
           <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-widest text-black">
             <Music className="w-4 h-4" /> Secret Unlocked
           </div>
-          <button 
-            onClick={() => setShowEasterEgg(false)} 
+          <button
+            onClick={() => setShowEasterEgg(false)}
             className="text-gray-500 hover:text-black transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
-        
+
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-black text-white flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)] animate-pulse">
-             <Music className="w-6 h-6" />
+            <Music className="w-6 h-6" />
           </div>
           <div className="flex-1 overflow-hidden">
             <div className="font-bold text-sm font-sans uppercase truncate text-black">Sign of the Times</div>
@@ -391,34 +392,34 @@ export default function App() {
 // Reusable Crew Card for the accordion layout
 function CrewCard({ member }) {
   const [expanded, setExpanded] = useState(false);
-  
+
   return (
     <div className={`border border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all overflow-hidden ${expanded ? 'pb-4' : ''}`}>
-      <button 
-        onClick={() => setExpanded(!expanded)} 
+      <button
+        onClick={() => setExpanded(!expanded)}
         className="w-full flex items-center justify-between p-4 hover:bg-gray-50 focus:outline-none transition-colors"
       >
         <div className="flex items-center gap-4">
           <div className={`relative overflow-hidden w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-black flex items-center justify-center shrink-0 ${member.color}`}>
-             {/* Initials Fallback (Now underneath the image) */}
-             <span className="text-xl sm:text-2xl font-black font-sans tracking-widest absolute inset-0 flex items-center justify-center z-0">{member.initials}</span>
-             
-             {/* Profile Picture Implementation */}
-             <img 
-               src={member.photoUrl} 
-               alt={member.name}
-               className="absolute inset-0 w-full h-full object-cover z-10 bg-white"
-               onError={(e) => {
-                 e.currentTarget.style.display = 'none';
-               }}
-             />
+            {/* Initials Fallback (Now underneath the image) */}
+            <span className="text-xl sm:text-2xl font-black font-sans tracking-widest absolute inset-0 flex items-center justify-center z-0">{member.initials}</span>
+
+            {/* Profile Picture Implementation */}
+            <img
+              src={member.photoUrl}
+              alt={member.name}
+              className="absolute inset-0 w-full h-full object-cover z-10 bg-white"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
           </div>
           <div className="text-left">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-               <h3 className="text-lg sm:text-xl font-bold font-sans uppercase text-black">{member.name}</h3>
-               <span className="px-2 py-0.5 bg-black text-white text-[10px] font-sans font-bold tracking-widest uppercase">
-                 {member.agency}
-               </span>
+              <h3 className="text-lg sm:text-xl font-bold font-sans uppercase text-black">{member.name}</h3>
+              <span className="px-2 py-0.5 bg-black text-white text-[10px] font-sans font-bold tracking-widest uppercase">
+                {member.agency}
+              </span>
             </div>
             <div className="text-gray-600 font-sans text-xs font-bold uppercase tracking-wider">
               {member.role}
@@ -429,7 +430,7 @@ function CrewCard({ member }) {
           {expanded ? <ChevronUp className="w-6 h-6 text-gray-500" /> : <ChevronDown className="w-6 h-6 text-gray-500" />}
         </div>
       </button>
-      
+
       {expanded && (
         <div className="px-4 pt-4 border-t border-gray-200 mx-4 sm:ml-[112px] animate-in fade-in slide-in-from-top-2">
           <p className="text-sm font-serif text-gray-800 mb-4 leading-relaxed">
@@ -462,21 +463,20 @@ function SectionHeader({ icon: Icon, title }) {
 function RocketGraphic() {
   const [stage, setStage] = useState('sls');
 
-  const getStageClass = (id) => `cursor-pointer transition-all duration-300 ${
-    stage === id || stage === 'sls'
-      ? 'opacity-100 stroke-[4px]' 
+  const getStageClass = (id) => `cursor-pointer transition-all duration-300 ${stage === id || stage === 'sls'
+      ? 'opacity-100 stroke-[4px]'
       : 'opacity-50 hover:opacity-80 stroke-[2px]'
-  }`;
+    }`;
 
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white border border-black p-4 md:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)]">
-        
+
         {/* Left: Interactive Schematic SVG */}
         <div className="flex justify-center h-[500px] md:h-[600px] bg-slate-900 rounded border border-gray-300 p-4 relative pattern-grid-lg overflow-hidden">
           {/* Helper text overlay */}
           <div className="absolute bottom-4 left-4 bg-white border border-black px-3 py-1 font-sans text-xs uppercase font-bold flex items-center gap-2 shadow-sm z-10 pointer-events-none">
-             <Info className="w-3 h-3" /> Select a component
+            <Info className="w-3 h-3" /> Select a component
           </div>
 
           <svg viewBox="0 0 400 800" className="w-full h-full drop-shadow-2xl cursor-pointer" onClick={() => setStage('sls')}>
@@ -499,73 +499,73 @@ function RocketGraphic() {
             {/* Solid Rocket Boosters (SRBs) */}
             <g onClick={(e) => { e.stopPropagation(); setStage('srb'); }} className={getStageClass('srb')}>
               {/* Left SRB */}
-              <rect x="139" y="280" width="26" height="440" fill="#f8fafc" stroke="#0f172a" rx="2"/>
-              <polygon points="139,280 152,230 165,280" fill="#cbd5e1" stroke="#0f172a"/>
-              <rect x="139" y="380" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
-              <rect x="139" y="500" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
-              <rect x="139" y="620" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
-              
+              <rect x="139" y="280" width="26" height="440" fill="#f8fafc" stroke="#0f172a" rx="2" />
+              <polygon points="139,280 152,230 165,280" fill="#cbd5e1" stroke="#0f172a" />
+              <rect x="139" y="380" width="26" height="8" fill="#94a3b8" stroke="#0f172a" />
+              <rect x="139" y="500" width="26" height="8" fill="#94a3b8" stroke="#0f172a" />
+              <rect x="139" y="620" width="26" height="8" fill="#94a3b8" stroke="#0f172a" />
+
               {/* Right SRB */}
-              <rect x="235" y="280" width="26" height="440" fill="#f8fafc" stroke="#0f172a" rx="2"/>
-              <polygon points="235,280 248,230 261,280" fill="#cbd5e1" stroke="#0f172a"/>
-              <rect x="235" y="380" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
-              <rect x="235" y="500" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
-              <rect x="235" y="620" width="26" height="8" fill="#94a3b8" stroke="#0f172a"/>
+              <rect x="235" y="280" width="26" height="440" fill="#f8fafc" stroke="#0f172a" rx="2" />
+              <polygon points="235,280 248,230 261,280" fill="#cbd5e1" stroke="#0f172a" />
+              <rect x="235" y="380" width="26" height="8" fill="#94a3b8" stroke="#0f172a" />
+              <rect x="235" y="500" width="26" height="8" fill="#94a3b8" stroke="#0f172a" />
+              <rect x="235" y="620" width="26" height="8" fill="#94a3b8" stroke="#0f172a" />
             </g>
 
             {/* Core Stage */}
             <g onClick={(e) => { e.stopPropagation(); setStage('core'); }} className={getStageClass('core')}>
-              <rect x="165" y="300" width="70" height="400" fill="#ea580c" stroke="#0f172a" rx="2"/>
-              <rect x="165" y="340" width="70" height="15" fill="#c2410c" stroke="#0f172a"/>
-              <rect x="165" y="440" width="70" height="4" fill="#c2410c" stroke="#0f172a"/>
-              <rect x="165" y="620" width="70" height="4" fill="#c2410c" stroke="#0f172a"/>
+              <rect x="165" y="300" width="70" height="400" fill="#ea580c" stroke="#0f172a" rx="2" />
+              <rect x="165" y="340" width="70" height="15" fill="#c2410c" stroke="#0f172a" />
+              <rect x="165" y="440" width="70" height="4" fill="#c2410c" stroke="#0f172a" />
+              <rect x="165" y="620" width="70" height="4" fill="#c2410c" stroke="#0f172a" />
               <text x="200" y="520" fill="#9a3412" fontSize="24" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle" transform="rotate(-90 200 520)">SLS</text>
             </g>
 
             {/* LVSA (Launch Vehicle Stage Adapter) */}
             <g onClick={(e) => { e.stopPropagation(); setStage('lvsa'); }} className={getStageClass('lvsa')}>
-              <polygon points="165,300 235,300 223,240 177,240" fill="#ea580c" stroke="#0f172a"/>
-              <rect x="177" y="285" width="46" height="3" fill="#c2410c" opacity="0.5"/>
+              <polygon points="165,300 235,300 223,240 177,240" fill="#ea580c" stroke="#0f172a" />
+              <rect x="177" y="285" width="46" height="3" fill="#c2410c" opacity="0.5" />
             </g>
 
             {/* ICPS */}
             <g onClick={(e) => { e.stopPropagation(); setStage('icps'); }} className={getStageClass('icps')}>
-              <rect x="177" y="190" width="46" height="50" fill="#e2e8f0" stroke="#0f172a"/>
-              <rect x="177" y="230" width="46" height="4" fill="#cbd5e1" stroke="#0f172a"/>
+              <rect x="177" y="190" width="46" height="50" fill="#e2e8f0" stroke="#0f172a" />
+              <rect x="177" y="230" width="46" height="4" fill="#cbd5e1" stroke="#0f172a" />
             </g>
 
             {/* Orion Spacecraft */}
             <g onClick={(e) => { e.stopPropagation(); setStage('orion'); }} className={getStageClass('orion')}>
               {/* Service Module */}
-              <rect x="177" y="150" width="46" height="40" fill="#cbd5e1" stroke="#0f172a"/>
-              <rect x="174" y="160" width="52" height="4" fill="#334155" stroke="#0f172a"/>
-              <rect x="174" y="175" width="52" height="4" fill="#334155" stroke="#0f172a"/>
+              <rect x="177" y="150" width="46" height="40" fill="#cbd5e1" stroke="#0f172a" />
+              <rect x="174" y="160" width="52" height="4" fill="#334155" stroke="#0f172a" />
+              <rect x="174" y="175" width="52" height="4" fill="#334155" stroke="#0f172a" />
               {/* Capsule */}
-              <polygon points="177,150 223,150 213,120 187,120" fill="#f8fafc" stroke="#0f172a"/>
+              <polygon points="177,150 223,150 213,120 187,120" fill="#f8fafc" stroke="#0f172a" />
             </g>
 
             {/* Launch Abort System (LAS) */}
             <g onClick={(e) => { e.stopPropagation(); setStage('las'); }} className={getStageClass('las')}>
-              <polygon points="187,120 213,120 204,60 196,60" fill="#f8fafc" stroke="#0f172a"/>
+              <polygon points="187,120 213,120 204,60 196,60" fill="#f8fafc" stroke="#0f172a" />
               <rect x="194" y="55" width="12" height="5" fill="#e2e8f0" stroke="#0f172a" rx="1" />
-              <rect x="197" y="20" width="6" height="35" fill="#f8fafc" stroke="#0f172a"/>
-              <polygon points="197,20 203,20 200,5" fill="#f8fafc" stroke="#0f172a"/>
+              <rect x="197" y="20" width="6" height="35" fill="#f8fafc" stroke="#0f172a" />
+              <polygon points="197,20 203,20 200,5" fill="#f8fafc" stroke="#0f172a" />
             </g>
           </svg>
         </div>
 
         {/* Right: Stage Information */}
         <div className="flex flex-col justify-center">
-          
+
           <div className="border-l-4 border-black pl-6">
             <h2 className="text-3xl md:text-4xl font-sans font-black uppercase mb-4 tracking-tight">
               {rocketStages[stage].title}
             </h2>
-            
+
             <p className="text-lg text-gray-700 font-serif mb-8 leading-relaxed">
               {rocketStages[stage].desc}
             </p>
-            
+
             <div className="grid grid-cols-2 gap-4 mb-8">
               {Object.entries(rocketStages[stage].stats).map(([key, value]) => (
                 <div key={key} className="border-t-2 border-black pt-2">
@@ -606,18 +606,18 @@ function TimelineGraphic() {
   // Use the exact precise geometry from the previous version
   const getShipPosition = (idx) => {
     const positions = [
-      { x: 210, y: 160, r: -120 },    
-      { x: 140, y: 125, r: -180 },    
-      { x: 160, y: 290, r: -360 },    
-      { x: 250, y: 200, r: -450 },    
-      { x: 140, y:  90, r: -540 },    
-      { x: 150, y: 330, r: -720 },    
-      { x: 400, y: 230, r: -758 },    
-      { x: 720, y: 200, r: -630 },    
-      { x: 400, y: 170, r: -520 },    
-      { x: 105, y:  80, r: -555 },    
-      { x:  55, y: 150, r: -630 },    
-      { x:  85, y: 240, r: -700 },    
+      { x: 210, y: 160, r: -120 },
+      { x: 140, y: 125, r: -180 },
+      { x: 160, y: 290, r: -360 },
+      { x: 250, y: 200, r: -450 },
+      { x: 140, y: 90, r: -540 },
+      { x: 150, y: 330, r: -720 },
+      { x: 400, y: 230, r: -758 },
+      { x: 720, y: 200, r: -630 },
+      { x: 400, y: 170, r: -520 },
+      { x: 105, y: 80, r: -555 },
+      { x: 55, y: 150, r: -630 },
+      { x: 85, y: 240, r: -700 },
     ];
     return positions[idx];
   };
@@ -627,14 +627,14 @@ function TimelineGraphic() {
   return (
     <div className="flex flex-col">
       <div className="bg-white border-2 border-black p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-        
+
         <div className="p-4 md:p-6 bg-black text-white rounded-sm">
-          
+
           {/* 2D Space Visualizer */}
           <div className="relative w-full bg-slate-950 rounded-sm overflow-hidden mb-8 border border-gray-800">
             <svg viewBox="0 0 800 400" className="w-full h-auto">
               <rect width="100%" height="100%" fill="#020617" />
-              
+
               {/* Stars */}
               {stars.map((star, i) => (
                 <circle key={i} cx={star.x} cy={star.y} r={star.r} fill="#fff" opacity={star.opacity * 0.8} />
@@ -685,31 +685,31 @@ function TimelineGraphic() {
                   <path d="M 100 150 Q 120 130 150 140 T 180 160 Q 150 200 120 180 Z" fill="#16a34a" />
                   <path d="M 160 250 Q 180 230 200 240 T 220 260 Q 190 280 150 270 Z" fill="#16a34a" />
                 </g>
-                <circle cx="150" cy="200" r="72" fill="none" stroke="#38bdf8" strokeWidth="2" opacity="0.3"/>
+                <circle cx="150" cy="200" r="72" fill="none" stroke="#38bdf8" strokeWidth="2" opacity="0.3" />
                 <text x="150" y="205" fill="#fff" fontSize="13" fontWeight="bold" fontFamily="sans-serif" letterSpacing="1" textAnchor="middle">EARTH</text>
               </g>
 
               {/* Moon */}
               <g>
                 <circle cx="650" cy="200" r="24" fill="#94a3b8" />
-                <circle cx="642" cy="192" r="4" fill="#64748b" opacity="0.5"/>
-                <circle cx="658" cy="208" r="6" fill="#64748b" opacity="0.5"/>
-                <circle cx="638" cy="212" r="3" fill="#64748b" opacity="0.5"/>
+                <circle cx="642" cy="192" r="4" fill="#64748b" opacity="0.5" />
+                <circle cx="658" cy="208" r="6" fill="#64748b" opacity="0.5" />
+                <circle cx="638" cy="212" r="3" fill="#64748b" opacity="0.5" />
                 <text x="650" y="245" fill="#fff" fontSize="11" fontWeight="bold" fontFamily="sans-serif" letterSpacing="1" opacity="0.8" textAnchor="middle">MOON</text>
               </g>
 
               {/* Orion Spacecraft */}
-              <g 
-                style={{ 
-                  transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.r}deg)`, 
-                  transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)' 
+              <g
+                style={{
+                  transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.r}deg)`,
+                  transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
                 <polygon points="-12,-8 12,0 -12,8 -6,0" fill="#f8fafc" />
-                <polygon 
-                  points="-12,-3 -20,0 -12,3" 
-                  fill="#f97316" 
-                  className={`transition-opacity duration-500 ${[0, 2, 3, 5].includes(currentStep) ? 'opacity-100' : 'opacity-0'}`} 
+                <polygon
+                  points="-12,-3 -20,0 -12,3"
+                  fill="#f97316"
+                  className={`transition-opacity duration-500 ${[0, 2, 3, 5].includes(currentStep) ? 'opacity-100' : 'opacity-0'}`}
                 />
               </g>
             </svg>
@@ -733,31 +733,28 @@ function TimelineGraphic() {
             <div className="flex items-start overflow-x-auto pb-4 pt-2 px-2 snap-x custom-scrollbar">
               {timelineSteps.map((step, idx) => (
                 <div key={idx} className="flex flex-col items-center relative min-w-[120px] snap-center shrink-0 group cursor-pointer" onClick={() => setCurrentStep(idx)}>
-                  
+
                   {/* Connecting line */}
                   {idx !== 0 && (
-                    <div className={`absolute top-4 -left-[50%] w-full h-0.5 -z-10 transition-colors duration-500 ${
-                      idx <= currentStep ? 'bg-white' : 'bg-gray-800'
-                    }`}></div>
+                    <div className={`absolute top-4 -left-[50%] w-full h-0.5 -z-10 transition-colors duration-500 ${idx <= currentStep ? 'bg-white' : 'bg-gray-800'
+                      }`}></div>
                   )}
-                  
+
                   {/* Timeline Node */}
                   <button
-                    className={`w-8 h-8 rounded-full flex items-center justify-center font-bold font-sans text-sm transition-all duration-300 z-10 border-2 ${
-                      idx === currentStep 
+                    className={`w-8 h-8 rounded-full flex items-center justify-center font-bold font-sans text-sm transition-all duration-300 z-10 border-2 ${idx === currentStep
                         ? 'bg-white text-black border-white scale-125' :
-                      idx < currentStep 
-                        ? 'bg-gray-800 text-white border-gray-800 group-hover:bg-gray-700' 
-                        : 'bg-black text-gray-500 border-gray-800 group-hover:border-gray-600'
-                    }`}
+                        idx < currentStep
+                          ? 'bg-gray-800 text-white border-gray-800 group-hover:bg-gray-700'
+                          : 'bg-black text-gray-500 border-gray-800 group-hover:border-gray-600'
+                      }`}
                   >
                     {idx + 1}
                   </button>
-                  
+
                   {/* Step Label */}
-                  <span className={`mt-4 text-xs font-bold font-sans uppercase text-center px-2 transition-colors ${
-                    idx === currentStep ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'
-                  }`}>
+                  <span className={`mt-4 text-xs font-bold font-sans uppercase text-center px-2 transition-colors ${idx === currentStep ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'
+                    }`}>
                     {step.title}
                   </span>
                 </div>
